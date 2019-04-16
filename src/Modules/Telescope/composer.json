@@ -1,0 +1,30 @@
+{
+    "name": "Telescope",
+    "description": "",
+    "authors": [
+        {
+            "name": "Arthur Devious",
+            "email": "development@astralbot.io"
+        }
+    ],
+    "require-dev": {
+        "laravel/telescope": "*"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "laravel/telescope"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Telescope\\": ""
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan telescope:publish:assets"
+        ]
+    }
+}

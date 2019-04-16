@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Module Tests">
+            <directory suffix="Test.php">./src/Modules/*/Tests</directory>
+        </testsuite>
+        <testsuite name="Foundation Tests">
+            <directory suffix="Test.php">./src/Foundation/Tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/Modules</directory>
+            <directory suffix=".php">./src/Foundation</directory>
+            <exclude>
+                <directory suffix=".php">./src/Modules/*/Routes</directory>
+                <directory suffix=".php">./src/Modules/*/Resources</directory>
+                <directory suffix=".php">./src/Modules/*/Database</directory>
+                <directory suffix=".php">./src/Modules/*/Tests</directory>
+                <directory suffix=".php">./src/Foundation/Routes</directory>
+                <directory suffix=".php">./src/Foundation/Tests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_DEBUG" value="true"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_DRIVER" value="redis"/>
+        <env name="BROADCAST_DRIVER" value="log"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="MAIL_DRIVER" value="array"/>
+        <env name="REDIS_DB" value="2"/>
+        <env name="REDIS_CACHE_DB" value="3"/>
+        <env name="MONGODB_DB_DATABASE" value="supreme_testing"/>
+        <env name="DB_DATABASE" value="supreme_testing"/>
+        <env name="MODEL_CACHING" value="true"/>
+    </php>
+</phpunit>

@@ -1,0 +1,29 @@
+{
+    "name": "Horizon",
+    "description": "",
+    "authors": [
+        {
+            "name": "Arthur Devious",
+            "email": "development@astralbot.io"
+        }
+    ],
+    "require-dev": {
+        "laravel/horizon": "^1.4"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "laravel/horizon"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Horizon\\": ""
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+        ]
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "name": "Authorization",
+    "description": "",
+    "authors": [
+        {
+            "name": "Arthur Devious",
+            "email": "aamining2@gmail.com"
+        }
+    ],
+    "require": {
+        "spatie/laravel-permission": "^2"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "spatie/laravel-permission"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Authorization\\": ""
+        }
+    }
+}

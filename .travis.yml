@@ -1,0 +1,65 @@
+language: php
+
+dist: xenial
+
+services:
+- redis-server
+- mongodb
+
+addons:
+  mariadb: '10.4'
+  hosts:
+  - larapi.test
+  - api.larapi.test
+
+env:
+  global:
+  - setup=normal
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+    - php: 7.3
+      
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+- mysql -e 'CREATE DATABASE larapi_testing;'
+- echo '' > ./storage/logs/laravel.log
+- pecl uninstall igbinary
+- pecl uninstall redis
+- pecl uninstall mongodb
+- pecl install igbinary
+- yes | pecl install redis
+- pecl install mongodb
+- travis_retry composer self-update
+- cp .env.travis .env
+- composer require wikimedia/composer-merge-plugin --no-scripts --no-update
+
+install:
+- echo PUSHER_APP_SECRET=$PUSHER_APP_SECRET >> .env
+- echo AUTH0_CLIENT_SECRET=$AUTH0_CLIENT_SECRET >> .env
+- echo AUTH0_TEST_USER_NAME=$AUTH0_TEST_USER_NAME >> .env
+- echo AUTH0_TEST_USER_PASS=$AUTH0_TEST_USER_PASS >> .env
+- composer update --lock --no-scripts
+
+before_script:
+- php artisan key:generate
+- php artisan bootstrap:cache
+- php artisan env:display
+- composer update --lock
+
+script:
+- if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.2" ]]; then vendor/bin/phpunit --coverage-clover=coverage.clover; else vendor/bin/phpunit; fi
+
+after_script:
+- if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.2" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+- if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.2" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
+
+after_failure:
+- echo --------------- Begin > Laravel.log ---------------
+- cat storage/logs/laravel.log
+- echo --------------- End   > Laravel.log ---------------

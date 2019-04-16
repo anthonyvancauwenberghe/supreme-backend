@@ -1,0 +1,29 @@
+{
+    "name": "Mongo",
+    "description": "",
+    "authors": [
+        {
+            "name": "Arthur Devious",
+            "email": "development@astralbot.io"
+        }
+    ],
+    "require": {
+        "ext-mongodb": "^1.5.0",
+        "jenssegers/mongodb": "^3.4"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "jenssegers/mongodb"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Mongo\\": ""
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": []
+    }
+}

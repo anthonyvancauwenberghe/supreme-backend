@@ -1,0 +1,10 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Spatie\DataTransferObject\DataTransferObject;
+
+class $CLASS$ extends DataTransferObject
+{
+
+}
