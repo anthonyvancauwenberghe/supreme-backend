@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Shipping\Transformers;
+namespace Modules\Creditcard\Transformers;
 
 use Foundation\Abstracts\Transformers\Transformer;
 use Foundation\Exceptions\Exception;
-use Modules\Shipping\Entities\Shipping;
+use Modules\Creditcard\Entities\Creditcard;
 
-class ShippingTransformer extends Transformer
+class CreditcardTransformer extends Transformer
 {
 
     /**
@@ -23,8 +23,8 @@ class ShippingTransformer extends Transformer
      *
      * @return array
      */
-    public function transformResource(Shipping $shipping)
+    public function transformResource(Creditcard $creditcard)
     {
-        return $shipping->toArray();
+        return $creditcard->toArray();
     }
 }

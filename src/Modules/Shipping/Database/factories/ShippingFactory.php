@@ -5,14 +5,14 @@ use Modules\Shipping\Entities\Shipping;
 
 $factory->define(Shipping::class, function (Faker $faker) {
     return [
-        "full_name" => "John Appleseed",
-        "email" => "john.apple@mail.com",
-        "telephone" => "0123456789",
-        "address" => "3318 Jarvis Street3318 Jarvis Street3318 Jarvis Street",
+        "full_name" => $faker->name,
+        "email" => $faker->email,
+        "telephone" => $faker->phoneNumber,
+        "address" => $faker->address,
         "address_2" => "",
         "address_3" => "",
-        "city" => "New York",
-        "postal_code" => "14171",
-        "country" => "United States of America"
+        "city" => $faker->city,
+        "postal_code" => $faker->postcode,
+        "country" => $faker->country
     ];
 });

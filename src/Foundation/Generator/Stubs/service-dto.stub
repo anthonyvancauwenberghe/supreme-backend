@@ -9,7 +9,7 @@ use Modules\$MODULE$\Events\$MODULE$WasDeletedEvent;
 use Modules\$MODULE$\Contracts\$CLASS$Contract;
 use Modules\$MODULE$\Dtos\Create$CLEAN_NAME$Data;
 use Modules\$MODULE$\Dtos\Update$CLEAN_NAME$Data;
-use Modules\Shipping\Contracts\$CLEAN_NAME$RepositoryContract;
+use Modules\$MODULE$\Contracts\$CLEAN_NAME$RepositoryContract;
 use Illuminate\Database\Eloquent\Collection;
 
 class $CLASS$ implements $CLASS$Contract

@@ -6,6 +6,7 @@ use Modules\Shipping\Entities\Shipping;
 use Illuminate\Database\Eloquent\Collection;
 use Modules\Shipping\Dtos\CreateShippingData;
 use Modules\Shipping\Dtos\UpdateShippingData;
+use Modules\User\Entities\User;
 
 interface ShippingServiceContract
 {
@@ -24,9 +25,10 @@ interface ShippingServiceContract
     /**
      * @param $id
      * @param CreateShippingData $data
+     * @param User $user
      * @return Shipping
      */
-    public function create(CreateShippingData $data): Shipping;
+    public function create(CreateShippingData $data, User $user): Shipping;
 
     /**
      * @param $id

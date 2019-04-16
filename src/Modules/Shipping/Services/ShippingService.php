@@ -11,6 +11,7 @@ use Modules\Shipping\Dtos\CreateShippingData;
 use Modules\Shipping\Dtos\UpdateShippingData;
 use Modules\Shipping\Contracts\ShippingRepositoryContract;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\User\Entities\User;
 
 class ShippingService implements ShippingServiceContract
 {
@@ -61,11 +62,14 @@ class ShippingService implements ShippingServiceContract
 
     /**
      * @param CreateShippingData $data
+     * @param User $user
      * @return Shipping
      */
-    public function create(CreateShippingData $data): Shipping
+    public function create(CreateShippingData $data, User $user): Shipping
     {
-        $shipping = $this->repository->create($data->toArray());
+        $data = $data->toArray();
+        $data['user_id'] = $user->id;
+        $shipping = $this->repository->create($data);
         event(new ShippingWasCreatedEvent($shipping));
         return $shipping;
     }
@@ -78,7 +82,7 @@ class ShippingService implements ShippingServiceContract
     {
         $shipping = $this->repository->findOrResolve($id);
         $deleted = $this->repository->delete($shipping);
-        if($deleted)
+        if ($deleted)
             event(new ShippingWasDeletedEvent($shipping));
         return $deleted;
     }
