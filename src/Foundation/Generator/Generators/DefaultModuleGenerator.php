@@ -46,7 +46,7 @@ class DefaultModuleGenerator
 
         $this->moduleFactory->addRepository($this->moduleName . 'Repository', $this->moduleName);
 
-        $this->moduleFactory->addService($this->moduleName . 'Service');
+        $this->moduleFactory->addService($this->moduleName . 'Service',true);
 
         $this->moduleFactory->addController($this->moduleName . "Controller");
 

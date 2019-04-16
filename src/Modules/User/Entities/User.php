@@ -36,6 +36,8 @@ class User extends Model implements AuthorizableContract, AuthenticatableContrac
         ReceivesWebNotifications,
         ModelFactory;
 
+    protected $guard_name = "api";
+
     protected $policies = [
         UserPolicy::class,
     ];

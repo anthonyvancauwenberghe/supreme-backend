@@ -54,14 +54,19 @@ class ServiceMakeCommand extends ClassGeneratorCommand
 
     public function afterGeneration(): void
     {
-        GeneratorManager::module($this->getModuleName(), $this->isOverwriteable())
-            ->createServiceContract(ucfirst($this->getClassName()) . 'Contract');
+        if(!$this->isDtoService()){
+            GeneratorManager::module($this->getModuleName(), $this->isOverwriteable())
+                ->createServiceContract(ucfirst($this->getClassName()) . 'Contract');
+        }
+        else{
+            GeneratorManager::module($this->getModuleName(), $this->isOverwriteable())
+                ->createServiceContract(ucfirst($this->getClassName()) . 'Contract',true);
+            GeneratorManager::module($this->getModuleName(), $this->isOverwriteable())
+                ->createDto('Create' . $this->getCleanName() . 'Data');
 
-        /*        GeneratorManager::module($this->getModuleName(), $this->isOverwriteable())
-                    ->createDto($this->getCleanName().'CreateDto');
-
-                GeneratorManager::module($this->getModuleName(), $this->isOverwriteable())
-                    ->createDto($this->getCleanName().'UpdateDto');*/
+            GeneratorManager::module($this->getModuleName(), $this->isOverwriteable())
+                ->createDto('Update' . $this->getCleanName() . 'Data');
+        }
     }
 
     /**

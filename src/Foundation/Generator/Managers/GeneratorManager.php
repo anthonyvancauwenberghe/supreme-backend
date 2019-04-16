@@ -138,10 +138,11 @@ class GeneratorManager
     /**
      * @param string $serviceContractName
      */
-    public function createServiceContract(string $serviceContractName)
+    public function createServiceContract(string $serviceContractName, bool $dto = false)
     {
         $options = [
             "name" => $serviceContractName,
+            "--dto" => $dto
         ];
         $this->call('service-contract', $options);
     }

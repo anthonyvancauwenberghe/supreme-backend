@@ -4,14 +4,16 @@ namespace $NAMESPACE$;
 
 use Modules\$MODULE$\Entities\$MODULE$;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\$MODULE$\Dtos\Create$MODULE$Data;
+use Modules\$MODULE$\Dtos\Update$MODULE$Data;
 
 interface $CLASS$
 {
     /**
      * @param $id
-     * @return $MODULE$|null
+     * @return $MODULE$
      */
-    public function resolve($id): ?$MODULE$;
+    public function find($id): $MODULE$;
 
     /**
      * @param $userId
@@ -21,15 +23,17 @@ interface $CLASS$
 
     /**
      * @param $id
-     * @return $MODULE$|null
+     * @param Create$MODULE$Data $data
+     * @return $MODULE$
      */
-    public function update($id, array $data): ?$MODULE$;
+    public function create(Create$MODULE$Data $data): $MODULE$;
 
     /**
      * @param $id
+     * @param Update$MODULE$Data $data
      * @return $MODULE$
      */
-    public function create(array $data): $MODULE$;
+    public function update($id, Update$MODULE$Data $data): $MODULE$;
 
     /**
      * @param $id

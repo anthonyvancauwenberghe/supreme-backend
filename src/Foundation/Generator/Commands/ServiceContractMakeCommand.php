@@ -4,6 +4,7 @@ namespace Foundation\Generator\Commands;
 
 use Foundation\Generator\Abstracts\ClassGeneratorCommand;
 use Foundation\Generator\Events\ServiceContractGeneratedEvent;
+use Symfony\Component\Console\Input\InputOption;
 
 class ServiceContractMakeCommand extends ClassGeneratorCommand
 {
@@ -55,5 +56,34 @@ class ServiceContractMakeCommand extends ClassGeneratorCommand
             'NAMESPACE' => $this->getClassNamespace(),
             'CLASS' => $this->getClassName(),
         ];
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function setOptions(): array
+    {
+        return [
+            ['dto', null, InputOption::VALUE_OPTIONAL, 'A servicecontract with dto?', false],
+        ];
+    }
+
+    protected function handleDtoOption($shortcut, $type, $question, $default)
+    {
+        return $this->confirm('Do you want dtos with the service contract?', $default);
+    }
+
+    protected function isDtoService()
+    {
+        return $this->getOption("dto");
+    }
+
+    protected function stubName()
+    {
+        if ($this->isDtoService())
+            return "service-dto-contract.stub";
+        return "service-contract.stub";
     }
 }

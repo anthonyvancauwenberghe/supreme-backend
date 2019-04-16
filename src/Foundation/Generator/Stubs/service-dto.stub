@@ -49,23 +49,23 @@ class $CLASS$ implements $CLASS$Contract
 
     /**
      * @param $id
-     * @param array $data
+     * @param Update$CLEAN_NAME$Data $data
      * @return $CLEAN_NAME$
      */
     public function update($id, Update$CLEAN_NAME$Data $data): $CLEAN_NAME$
     {
-        $$LOWER_MODULE$ = $this->repository->update($id, $data);
+        $$LOWER_MODULE$ = $this->repository->update($id, $data->toArray());
         event(new $MODULE$WasUpdatedEvent($$LOWER_MODULE$));
         return $$LOWER_MODULE$;
     }
 
     /**
-     * @param array $data
+     * @param Create$CLEAN_NAME$Data $data
      * @return $CLEAN_NAME$
      */
     public function create(Create$CLEAN_NAME$Data $data): $CLEAN_NAME$
     {
-        $$LOWER_MODULE$ = $this->repository->create($data);
+        $$LOWER_MODULE$ = $this->repository->create($data->toArray());
         event(new $MODULE$WasCreatedEvent($$LOWER_MODULE$));
         return $$LOWER_MODULE$;
     }

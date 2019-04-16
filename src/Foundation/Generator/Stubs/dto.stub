@@ -2,9 +2,9 @@
 
 namespace $NAMESPACE$;
 
-use Spatie\DataTransferObject\DataTransferObject;
+use Foundation\Abstracts\Dtos\Dto;
 
-class $CLASS$ extends DataTransferObject
+class $CLASS$ extends Dto
 {
 
 }
