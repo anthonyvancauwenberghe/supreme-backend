@@ -1,0 +1,23 @@
+{
+    "name": "wishlist",
+    "description": "",
+    "authors": [
+            {
+                "name": "Arthur Devious",
+                "email": "development@astralbot.io"
+            }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+
+            ]
+        }
+    }
+}
