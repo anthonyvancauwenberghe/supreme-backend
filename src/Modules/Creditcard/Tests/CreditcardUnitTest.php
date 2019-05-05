@@ -3,6 +3,8 @@
 namespace Modules\Creditcard\Tests;
 
 use Foundation\Abstracts\Tests\TestCase;
+use Modules\Creditcard\Dtos\CreateCreditcardData;
+use Modules\Creditcard\Entities\Creditcard;
 
 class CreditcardUnitTest extends TestCase
 {
@@ -11,8 +13,10 @@ class CreditcardUnitTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testCreateDto()
     {
+        $dto = CreateCreditcardData::fromFactory(Creditcard::class);
+        $dto->validate();
         $this->assertTrue(true);
     }
 }

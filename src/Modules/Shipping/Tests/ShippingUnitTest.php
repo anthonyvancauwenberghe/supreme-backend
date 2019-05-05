@@ -3,6 +3,8 @@
 namespace Modules\Shipping\Tests;
 
 use Foundation\Abstracts\Tests\TestCase;
+use Modules\Shipping\Dtos\UpdateShippingData;
+use Modules\Shipping\Entities\Shipping;
 
 class ShippingUnitTest extends TestCase
 {
@@ -13,6 +15,8 @@ class ShippingUnitTest extends TestCase
      */
     public function testExample()
     {
-        $this->assertTrue(true);
+        $dto = UpdateShippingData::fromFactory(Shipping::class);
+
+        $this->assertNotEmpty($dto->toArray());
     }
 }

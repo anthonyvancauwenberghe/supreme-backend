@@ -4,6 +4,7 @@ namespace $NAMESPACE$;
 
 use Modules\$MODULE$\Entities\$MODULE$;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\User\Entities\User;
 
 interface $CLASS$
 {
@@ -23,7 +24,7 @@ interface $CLASS$
      * @param $id
      * @return $MODULE$
      */
-    public function create(array $data): $MODULE$;
+    public function create(array $data, User $user): $MODULE$;
 
     /**
      * @param $id

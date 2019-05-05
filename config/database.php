@@ -55,6 +55,22 @@ return [
             'engine'         => null,
         ],
 
+        'telescope' => [
+            'driver'         => 'mysql',
+            'host'           => env('TELECOPE_DB_HOST', '127.0.0.1'),
+            'port'           => env('TELECOPE_DB_PORT', '3306'),
+            'database'       => env('TELECOPE_DB_DATABASE', 'telescope'),
+            'username'       => env('TELECOPE_DB_USERNAME', 'root'),
+            'password'       => env('TELECOPE_DB_PASSWORD', ''),
+            'unix_socket'    => env('TELECOPE_DB_SOCKET', ''),
+            'charset'        => 'utf8mb4',
+            'collation'      => 'utf8mb4_unicode_ci',
+            'prefix'         => '',
+            'prefix_indexes' => true,
+            'strict'         => true,
+            'engine'         => null,
+        ],
+
         'mongodb' => [
             'driver'   => 'mongodb',
             'host'     => env('MONGODB_DB_HOST', 'localhost'),

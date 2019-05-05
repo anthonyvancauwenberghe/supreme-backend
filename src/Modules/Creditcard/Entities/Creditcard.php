@@ -9,6 +9,7 @@ use Foundation\Traits\ModelFactory;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Foundation\Contracts\Ownable;
 use Foundation\Traits\HasOwner;
+use Modules\User\Entities\User;
 
 /**
  * Class Creditcard.
@@ -30,7 +31,7 @@ class Creditcard extends Model implements CreditcardAttributes, Ownable
     /**
      * @var string
      */
-    protected $collection = 'creditcards';
+    protected $collection = 'credit_cards';
 
     /**
      * @var array
@@ -47,4 +48,15 @@ class Creditcard extends Model implements CreditcardAttributes, Ownable
         'updated_at',
         'deleted_at',
     ];
+
+    public function ownedBy()
+    {
+        return User::class;
+    }
+
+    public function getNumberAttribute($value){
+        return decrypt($value);
+    }
+
+
 }

@@ -11,7 +11,6 @@
 |
 */
 
-use Modules\Authorization\Entities\Permission;
 use Modules\Shipping\Permissions\ShippingPermission;
 
 Route::get('/', 'ShippingController@index')->middleware(['permission:'.ShippingPermission::INDEX_SHIPPING]);

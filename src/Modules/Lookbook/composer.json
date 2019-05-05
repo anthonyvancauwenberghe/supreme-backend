@@ -1,0 +1,13 @@
+{
+    "name": "Supreme lookbook",
+    "description": "",
+    "authors": [
+        {
+            "name": "Arthur Devious",
+            "email": "development@astralbot.io"
+        }
+    ],
+    "require" : {
+        "deviouspk/supreme-parser": "^1.0"
+    }
+}

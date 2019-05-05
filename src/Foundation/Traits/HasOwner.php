@@ -8,18 +8,11 @@
 
 namespace Foundation\Traits;
 
-use Modules\User\Entities\User;
-
 trait HasOwner
 {
     public function ownerId()
     {
-        return $this->{$this->getOwnerKey()};
-    }
-
-    public function ownedBy()
-    {
-        return User::class;
+        return $this->{$this->ownerKey()};
     }
 
     public function ownerKey()

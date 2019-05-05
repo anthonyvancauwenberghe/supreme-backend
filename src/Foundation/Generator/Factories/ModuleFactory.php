@@ -20,7 +20,7 @@ use Nwidart\Modules\Exceptions\FileAlreadyExistException;
  * Class User.
  *
  * @method void addMigration(string $name, string $table, bool $mongo)
- * @method void addController(string $name)
+ * @method void addController(string $name, bool $dto = false)
  * @method void addPolicy(string $name)
  * @method void addEvent(string $name)
  * @method void addNotification(string $name)
@@ -39,7 +39,7 @@ use Nwidart\Modules\Exceptions\FileAlreadyExistException;
  * @method void addCommand(string $name, ?string $commandName = null)
  * @method void addModel(string $name, bool $mongo = false, bool $migration = true)
  * @method void addService(string $name, bool $dto = false)
- * @method void addServiceContract(string $name, bool $bool = false)
+ * @method void addServiceContract(string $name, bool $dto = false)
  * @method void addException(string $name)
  * @method void addPermission(string $name)
  * @method void addAttribute(string $name)

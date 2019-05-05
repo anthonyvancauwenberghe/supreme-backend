@@ -17,10 +17,10 @@ interface ShippingServiceContract
     public function find($id): Shipping;
 
     /**
-     * @param $userId
+     * @param $user
      * @return Shipping[]
      */
-    public function getByUserId($userId): Collection;
+    public function fromUser($user): Collection;
 
     /**
      * @param $id

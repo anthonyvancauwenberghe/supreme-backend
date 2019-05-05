@@ -48,7 +48,7 @@ class DefaultModuleGenerator
 
         $this->moduleFactory->addService($this->moduleName . 'Service',true);
 
-        $this->moduleFactory->addController($this->moduleName . "Controller");
+        $this->moduleFactory->addController($this->moduleName . "Controller", true);
 
         $this->moduleFactory->addTest($this->moduleName . 'ServiceTest', 'service');
         $this->moduleFactory->addTest($this->moduleName . 'HttpTest', 'http');

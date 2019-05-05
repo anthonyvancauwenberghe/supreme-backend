@@ -4,6 +4,8 @@ namespace Modules\Creditcard\Http\Controllers;
 
 use Foundation\Abstracts\Controller\Controller;
 use Foundation\Responses\ApiResponse;
+use Modules\Creditcard\Dtos\CreateCreditcardData;
+use Modules\Creditcard\Dtos\UpdateCreditcardData;
 use Modules\Creditcard\Http\Requests\CreateCreditcardRequest;
 use Modules\Creditcard\Http\Requests\DeleteCreditcardRequest;
 use Modules\Creditcard\Http\Requests\FindCreditcardRequest;
@@ -11,6 +13,7 @@ use Modules\Creditcard\Http\Requests\IndexCreditcardRequest;
 use Modules\Creditcard\Http\Requests\UpdateCreditcardRequest;
 use Modules\Creditcard\Contracts\CreditcardServiceContract;
 use Modules\Creditcard\Transformers\CreditcardTransformer;
+use Modules\Creditcard\Transformers\HiddenCreditcardTransformer;
 
 class CreditcardController extends Controller
 {
@@ -34,44 +37,39 @@ class CreditcardController extends Controller
      */
     public function index(IndexCreditcardRequest $request)
     {
-        return CreditcardTransformer::collection($this->service->getByUserId(get_authenticated_user_id()));
+        return HiddenCreditcardTransformer::collection($this->service->fromUser($request->user()));
     }
 
     /**
-     * Store a newly created Creditcard in storage.
+     * Store a newly created Creditcard in the database.
      */
     public function store(CreateCreditcardRequest $request)
     {
-        $creditcard = $this->service->create($this->injectUserId($request));
-        return CreditcardTransformer::resource($creditcard);
+        $creditcard = $this->service->create(new CreateCreditcardData($request), $request->user());
+        return HiddenCreditcardTransformer::resource($creditcard);
     }
 
     /**
      * Update a Creditcard.
-     *
-     * @param UpdateCreditcardRequest $request
-     * @param $id
      */
     public function update(UpdateCreditcardRequest $request, $id)
     {
-        $creditcard = $this->service->resolve($id);
+        $creditcard = $this->service->find($id);
 
         $this->exists($creditcard);
         $this->hasAccess($creditcard);
-        $creditcard = $this->service->update($id, $request->toArray());
+        $creditcard = $this->service->update($id, new UpdateCreditcardData($request));
 
-        return CreditcardTransformer::resource($creditcard);
+        return HiddenCreditcardTransformer::resource($creditcard);
     }
 
     /**
      * Show the specified resource.
      *
-     * @param FindCreditcardRequest $request
-     * @param $id
      */
-    public function show(FindCreditcardRequest $request ,$id)
+    public function show(FindCreditcardRequest $request, $id)
     {
-        $creditcard = $this->service->resolve($id);
+        $creditcard = $this->service->find($id);
 
         $this->exists($creditcard);
         $this->hasAccess($creditcard);
@@ -84,7 +82,7 @@ class CreditcardController extends Controller
      */
     public function destroy(DeleteCreditcardRequest $request, $id)
     {
-        $creditcard = $this->service->resolve($id);
+        $creditcard = $this->service->find($id);
 
         $this->exists($creditcard);
         $this->hasAccess($creditcard);

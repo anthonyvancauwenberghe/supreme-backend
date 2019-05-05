@@ -40,12 +40,14 @@ class ShippingService implements ShippingServiceContract
     }
 
     /**
-     * @param $id
+     * @param User|string|int $id
      * @return Shipping[]
      */
-    public function getByUserId($id): Collection
+    public function fromUser($user): Collection
     {
-        return $this->repository->findByField('user_id', $id)->get();
+        if ($user instanceof User)
+            $user = $user->id;
+        return $this->repository->findByField('user_id', $user);
     }
 
     /**
@@ -55,8 +57,23 @@ class ShippingService implements ShippingServiceContract
      */
     public function update($id, UpdateShippingData $data): Shipping
     {
-        $shipping = $this->repository->update($id, $data->toArray());
-        event(new ShippingWasUpdatedEvent($shipping));
+        $shipping = $this->repository->findOrResolve($id);
+        $data->except('primary');
+
+        if ($updated = !empty($input = $data->toArray()))
+            $shipping = $this->repository->update($id, $input);
+
+        if ($data->exists('primary')) {
+            if ($data->primary)
+                $shipping = $this->repository->setPrimary($shipping);
+            else
+                $shipping = $this->repository->setPrimary($this->fromUser($shipping->user_id)->first());
+            $updated = true;
+        }
+
+        if ($updated)
+            event(new ShippingWasUpdatedEvent($shipping));
+
         return $shipping;
     }
 
@@ -67,10 +84,21 @@ class ShippingService implements ShippingServiceContract
      */
     public function create(CreateShippingData $data, User $user): Shipping
     {
-        $data = $data->toArray();
-        $data['user_id'] = $user->id;
-        $shipping = $this->repository->create($data);
+        $primary = $data->primary ?? false;
+
+        $data
+            ->with('user_id', $user->id)
+            ->override('primary', false);
+
+        $count = $this->fromUser($user)->count();
+
+        $shipping = $this->repository->create($data->toArray());
+
+        if ($count === 0 || $primary)
+            $shipping = $this->setPrimary($shipping);
+
         event(new ShippingWasCreatedEvent($shipping));
+
         return $shipping;
     }
 
@@ -82,8 +110,20 @@ class ShippingService implements ShippingServiceContract
     {
         $shipping = $this->repository->findOrResolve($id);
         $deleted = $this->repository->delete($shipping);
-        if ($deleted)
+        if ($deleted) {
             event(new ShippingWasDeletedEvent($shipping));
+            if ($shipping->primary) {
+                $shipping = $this->fromUser($shipping->user_id)->first();
+                if ($shipping !== null) {
+                    $this->setPrimary($shipping);
+                }
+            }
+        }
         return $deleted;
+    }
+
+    protected function setPrimary($shipping)
+    {
+        return $this->update($shipping, UpdateShippingData::make(["primary" => true]));
     }
 }

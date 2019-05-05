@@ -6,6 +6,7 @@ use Modules\$MODULE$\Entities\$MODULE$;
 use Modules\$MODULE$\Dtos\Create$MODULE$Data;
 use Modules\$MODULE$\Dtos\Update$MODULE$Data;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\User\Entities\User;
 
 interface $CLASS$
 {
@@ -16,17 +17,17 @@ interface $CLASS$
     public function find($id): $MODULE$;
 
     /**
-     * @param $userId
+     * @param $user
      * @return $MODULE$[]
      */
-    public function getByUserId($userId): Collection;
+    public function fromUser($user): Collection;
 
     /**
      * @param $id
      * @param Create$MODULE$Data $data
      * @return $MODULE$
      */
-    public function create(Create$MODULE$Data $data): $MODULE$;
+    public function create(Create$MODULE$Data $data, User $user): $MODULE$;
 
     /**
      * @param $id

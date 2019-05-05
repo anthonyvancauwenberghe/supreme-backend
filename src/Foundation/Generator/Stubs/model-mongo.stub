@@ -9,6 +9,7 @@ use Foundation\Traits\ModelFactory;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Foundation\Contracts\Ownable;
 use Foundation\Traits\HasOwner;
+use Modules\User\Entities\User;
 
 /**
  * Class $CLASS$.
@@ -47,4 +48,9 @@ class $CLASS$ extends Model implements $CLASS$Attributes, Ownable
         'updated_at',
         'deleted_at',
     ];
+
+    public function ownedBy()
+    {
+       return User::class;
+    }
 }

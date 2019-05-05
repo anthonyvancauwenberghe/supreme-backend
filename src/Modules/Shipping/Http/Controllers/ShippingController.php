@@ -4,6 +4,8 @@ namespace Modules\Shipping\Http\Controllers;
 
 use Foundation\Abstracts\Controller\Controller;
 use Foundation\Responses\ApiResponse;
+use Modules\Shipping\Dtos\CreateShippingData;
+use Modules\Shipping\Dtos\UpdateShippingData;
 use Modules\Shipping\Http\Requests\CreateShippingRequest;
 use Modules\Shipping\Http\Requests\DeleteShippingRequest;
 use Modules\Shipping\Http\Requests\FindShippingRequest;
@@ -34,7 +36,7 @@ class ShippingController extends Controller
      */
     public function index(IndexShippingRequest $request)
     {
-        return ShippingTransformer::collection($this->service->getByUserId(get_authenticated_user_id()));
+        return ShippingTransformer::collection($this->service->fromUser($request->user()));
     }
 
     /**
@@ -42,36 +44,30 @@ class ShippingController extends Controller
      */
     public function store(CreateShippingRequest $request)
     {
-        $shipping = $this->service->create($this->injectUserId($request));
+        $shipping = $this->service->create(new CreateShippingData($request), $request->user());
         return ShippingTransformer::resource($shipping);
     }
 
     /**
      * Update a Shipping.
-     *
-     * @param UpdateShippingRequest $request
-     * @param $id
      */
     public function update(UpdateShippingRequest $request, $id)
     {
-        $shipping = $this->service->resolve($id);
+        $shipping = $this->service->find($id);
 
         $this->exists($shipping);
         $this->hasAccess($shipping);
-        $shipping = $this->service->update($id, $request->toArray());
+        $shipping = $this->service->update($id, new UpdateShippingData($request));
 
         return ShippingTransformer::resource($shipping);
     }
 
     /**
      * Show the specified resource.
-     *
-     * @param FindShippingRequest $request
-     * @param $id
      */
     public function show(FindShippingRequest $request ,$id)
     {
-        $shipping = $this->service->resolve($id);
+        $shipping = $this->service->find($id);
 
         $this->exists($shipping);
         $this->hasAccess($shipping);
@@ -84,7 +80,7 @@ class ShippingController extends Controller
      */
     public function destroy(DeleteShippingRequest $request, $id)
     {
-        $shipping = $this->service->resolve($id);
+        $shipping = $this->service->find($id);
 
         $this->exists($shipping);
         $this->hasAccess($shipping);

@@ -5,7 +5,7 @@ use Jenssegers\Mongodb\Schema\Blueprint;
 
 class CreateShippingCollection extends Migration
 {
-    protected $collection = 'shippings';
+    protected $collection = 'shipping';
 
     public function migrate(Blueprint $schema)
     {

@@ -82,10 +82,11 @@ class GeneratorManager
     /**
      * @param string $controllerName
      */
-    public function createController(string $controllerName)
+    public function createController(string $controllerName, bool $dto = false)
     {
         $options = [
             "name" => $controllerName,
+            "--dto" => $dto
         ];
         $this->call('controller', $options);
     }

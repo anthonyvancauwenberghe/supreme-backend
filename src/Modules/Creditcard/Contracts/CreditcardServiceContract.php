@@ -6,6 +6,7 @@ use Modules\Creditcard\Entities\Creditcard;
 use Modules\Creditcard\Dtos\CreateCreditcardData;
 use Modules\Creditcard\Dtos\UpdateCreditcardData;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\User\Entities\User;
 
 interface CreditcardServiceContract
 {
@@ -19,14 +20,14 @@ interface CreditcardServiceContract
      * @param $userId
      * @return Creditcard[]
      */
-    public function getByUserId($userId): Collection;
+    public function fromUser($userId): Collection;
 
     /**
      * @param $id
      * @param CreateCreditcardData $data
      * @return Creditcard
      */
-    public function create(CreateCreditcardData $data): Creditcard;
+    public function create(CreateCreditcardData $data, User $user): Creditcard;
 
     /**
      * @param $id

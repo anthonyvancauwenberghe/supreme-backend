@@ -3,12 +3,12 @@
 use Modules\Mongo\Abstracts\MongoCollectionMigration as Migration;
 use Jenssegers\Mongodb\Schema\Blueprint;
 
-class CreateCreditcardCollection extends Migration
+class CreateLookbookCollection extends Migration
 {
-    protected $collection = 'credit_cards';
+    protected $collection = 'lookbook';
 
     public function migrate(Blueprint $schema)
     {
-
+        $schema->index('url');
     }
 }

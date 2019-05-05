@@ -9,6 +9,7 @@ use Foundation\Traits\ModelFactory;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Foundation\Contracts\Ownable;
 use Foundation\Traits\HasOwner;
+use Modules\User\Entities\User;
 
 /**
  * Class Shipping.
@@ -30,7 +31,7 @@ class Shipping extends Model implements ShippingAttributes, Ownable
     /**
      * @var string
      */
-    protected $collection = 'shippings';
+    protected $collection = 'shipping';
 
     /**
      * @var array
@@ -47,4 +48,16 @@ class Shipping extends Model implements ShippingAttributes, Ownable
         'updated_at',
         'deleted_at',
     ];
+
+    public function ownedBy()
+    {
+        return User::class;
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+
 }

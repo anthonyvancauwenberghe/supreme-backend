@@ -6,7 +6,7 @@ use Foundation\Abstracts\Transformers\Transformer;
 use Foundation\Exceptions\Exception;
 use Modules\Creditcard\Entities\Creditcard;
 
-class CreditcardTransformer extends Transformer
+class HiddenCreditcardTransformer extends Transformer
 {
 
     /**
@@ -19,10 +19,8 @@ class CreditcardTransformer extends Transformer
         return [
             "id" => $creditcard->id,
             "type" => $creditcard->type,
-            "number" => $creditcard->number,
-            "expiry_month" => $creditcard->expiry_month,
-            "expiry_year" => $creditcard->expiry_year,
-            "cvv" => $creditcard->cvv,
+            "number" => str_repeat('*', strlen($creditcard->number) - 4) . substr($creditcard->number, -4),
+            "cvv" => str_repeat("*", strlen($creditcard->cvv)),
             "primary" => $creditcard->primary
         ];
     }

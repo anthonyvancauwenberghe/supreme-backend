@@ -2,44 +2,74 @@
 
 namespace Modules\Shipping\Dtos;
 
-use Foundation\Abstracts\Dtos\Dto;
+use Larapie\DataTransferObject\Annotations\Inherit;
+use Larapie\DataTransferObject\Annotations\Optional;
 
-class UpdateShippingData extends Dto
+class UpdateShippingData extends CreateShippingData
 {
     /**
-     * @var string|optional $fullName
+     * @Optional
+     * @Inherit
      */
-    public $full_name;
+    public $first_name;
+
     /**
-     * @var string|optional $email
+     * @Optional
+     * @Inherit
+     */
+    public $last_name;
+
+    /**
+     * @Optional
+     * @Inherit
      */
     public $email;
+
     /**
-     * @var string|optional $telephone
+     * @Optional
+     * @Inherit
      */
     public $telephone;
+
     /**
-     * @var string|optional $address
+     * @Optional
+     * @Inherit
      */
     public $address;
+
     /**
-     * @var string|optional $address_2
+     * @Optional
+     * @Inherit
      */
     public $address_2;
+
     /**
-     * @var string|optional $address_3
+     * @Optional
+     * @Inherit
      */
     public $address_3;
+
     /**
-     * @var string|optional $city
+     * @Optional
+     * @Inherit
      */
     public $city;
+
     /**
-     * @var string|optional $postal_code
+     * @Optional
+     * @Inherit
      */
     public $postal_code;
+
     /**
-     * @var string|optional $country
+     * @Optional
+     * @Inherit
      */
     public $country;
+
+    /**
+     * @Optional
+     * @Inherit
+     */
+    public $primary;
 }
