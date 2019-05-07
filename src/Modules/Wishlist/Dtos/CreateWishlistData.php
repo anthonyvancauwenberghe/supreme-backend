@@ -20,9 +20,4 @@ class CreateWishlistData extends Dto
      * @var int $size_id
      */
     public $size_id;
-
-    /**
-     * @var bool
-     */
-    public $notify = true;
 }

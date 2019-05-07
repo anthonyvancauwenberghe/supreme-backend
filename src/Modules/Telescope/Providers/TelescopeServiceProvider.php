@@ -110,13 +110,13 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider imple
      *
      * @return void
      */
-    protected function gate()
+    protected function authorization()
     {
-        Gate::define('viewTelescope', function ($user) {
+        /*Gate::define('viewTelescope', function ($user) {
             return in_array($user->email, [
                 //
             ]);
-        });
+        });*/
     }
 
     public function registrationCondition(): bool

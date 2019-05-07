@@ -51,6 +51,12 @@ class Wishlist extends Model implements WishlistAttributes, Ownable
 
     public function ownedBy()
     {
-       return User::class;
+        return User::class;
     }
+
+    public function user()
+    {
+        $this->belongsTo(User::class);
+    }
+
 }

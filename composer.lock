@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4d53a6b984a8f524a27ad1fac347a56",
+    "content-hash": "8df26b95586d931a8f992043bd0893f3",
     "packages": [
         {
             "name": "auth0/auth0-php",
@@ -155,6 +155,51 @@
                 "push"
             ],
             "time": "2017-08-28T19:19:39+00:00"
+        },
+        {
+            "name": "campo/random-user-agent",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joecampo/random-user-agent.git",
+                "reference": "4a88bd90f66ca398b050b19848e3c6ea143ce8a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joecampo/random-user-agent/zipball/4a88bd90f66ca398b050b19848e3c6ea143ce8a0",
+                "reference": "4a88bd90f66ca398b050b19848e3c6ea143ce8a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Campo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joe Campo",
+                    "email": "jcampo@gmail.com"
+                }
+            ],
+            "description": "Generate real random user-agents.",
+            "keywords": [
+                "spoofing user",
+                "user agent",
+                "user agents",
+                "user-agent"
+            ],
+            "time": "2018-06-13T14:26:21+00:00"
         },
         {
             "name": "composer/semver",
@@ -2101,6 +2146,45 @@
                 "serialize"
             ],
             "time": "2019-02-22T10:30:00+00:00"
+        },
+        {
+            "name": "orphans/git-deploy-laravel",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orphans/git-deploy-laravel.git",
+                "reference": "c2f0a10463e34b5e483dfdf0475b6d017c004246"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orphans/git-deploy-laravel/zipball/c2f0a10463e34b5e483dfdf0475b6d017c004246",
+                "reference": "c2f0a10463e34b5e483dfdf0475b6d017c004246",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5",
+                "illuminate/http": "~5",
+                "illuminate/support": "~5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Orphans\\GitDeploy\\GitDeployServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orphans\\GitDeploy\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Helps automate the deployment of projects onto servers by utilising Git web hooks.",
+            "time": "2018-05-18T09:06:27+00:00"
         },
         {
             "name": "paquettg/php-html-parser",

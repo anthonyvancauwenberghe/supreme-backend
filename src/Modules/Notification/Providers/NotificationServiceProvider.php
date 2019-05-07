@@ -5,6 +5,7 @@ namespace Modules\Notification\Providers;
 use Illuminate\Support\ServiceProvider;
 use Modules\Notification\Contracts\NotificationServiceContract;
 use Modules\Notification\Services\NotificationService;
+use Modules\User\Repositories\UserRepository;
 use Modules\User\Services\UserService;
 
 class NotificationServiceProvider extends ServiceProvider
@@ -26,7 +27,9 @@ class NotificationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(NotificationServiceContract::class, function () {
-            return new NotificationService(new UserService());
+            return new NotificationService(new UserService(new UserRepository($this->app)));
         });
+
+        $this->app->register(\LaravelFCM\FCMServiceProvider::class);
     }
 }
