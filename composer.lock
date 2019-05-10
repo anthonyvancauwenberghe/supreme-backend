@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8df26b95586d931a8f992043bd0893f3",
+    "content-hash": "3b4669c16e67261d180f411f0e7ed0f5",
     "packages": [
         {
             "name": "auth0/auth0-php",
@@ -100,61 +100,6 @@
             ],
             "description": "Laravel plugin that helps authenticate with the auth0 service",
             "time": "2018-03-20T19:12:33+00:00"
-        },
-        {
-            "name": "brozot/laravel-fcm",
-            "version": "v1.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/brozot/Laravel-FCM.git",
-                "reference": "20f2881071cfe7c424f528171c794353d0e5394f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/brozot/Laravel-FCM/zipball/20f2881071cfe7c424f528171c794353d0e5394f",
-                "reference": "20f2881071cfe7c424f528171c794353d0e5394f",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~6.0",
-                "illuminate/support": "5.*",
-                "monolog/monolog": "^1.19",
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "laravel/laravel": "5.2.*",
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "4.7.*",
-                "satooshi/php-coveralls": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "LaravelFCM\\": "src/",
-                    "LaravelFCM\\Mocks\\": "tests/mocks"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Brosy",
-                    "email": "nicolas.brosy@gmail.com"
-                }
-            ],
-            "description": "Laravel / Lumen package for Firebase Cloud Messaging ",
-            "keywords": [
-                "FCM",
-                "Firebase Cloud Messaging",
-                "firebase",
-                "laravel",
-                "lumen",
-                "notification",
-                "push"
-            ],
-            "time": "2017-08-28T19:19:39+00:00"
         },
         {
             "name": "campo/random-user-agent",
@@ -309,21 +254,22 @@
         },
         {
             "name": "deviouspk/supreme-parser",
-            "version": "1.0",
+            "version": "2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deviouspk/supreme-parser.git",
-                "reference": "ae25b3ca137051b3a42a24fd095a3dfb48167733"
+                "reference": "080dc54ba071209c1213d05ad35d1865b80d5804"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deviouspk/supreme-parser/zipball/ae25b3ca137051b3a42a24fd095a3dfb48167733",
-                "reference": "ae25b3ca137051b3a42a24fd095a3dfb48167733",
+                "url": "https://api.github.com/repos/deviouspk/supreme-parser/zipball/080dc54ba071209c1213d05ad35d1865b80d5804",
+                "reference": "080dc54ba071209c1213d05ad35d1865b80d5804",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^6.3",
+                "nesbot/carbon": "^2.17",
                 "paquettg/php-html-parser": "^2.0",
                 "php": "^7.2"
             },
@@ -334,10 +280,7 @@
             "autoload": {
                 "psr-4": {
                     "Supreme\\Parser\\": "src"
-                },
-                "files": [
-                    "src/Support/helpers.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -356,7 +299,7 @@
                 "parser",
                 "supreme"
             ],
-            "time": "2019-04-11T11:05:35+00:00"
+            "time": "2019-05-09T15:56:15+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -806,16 +749,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.14.2",
+            "version": "v2.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "ff401e58261ffc5934a58f795b3f95b355e276cb"
+                "reference": "adfab51ae979ee8b0fcbc55aa231ec2786cb1f91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/ff401e58261ffc5934a58f795b3f95b355e276cb",
-                "reference": "ff401e58261ffc5934a58f795b3f95b355e276cb",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/adfab51ae979ee8b0fcbc55aa231ec2786cb1f91",
+                "reference": "adfab51ae979ee8b0fcbc55aa231ec2786cb1f91",
                 "shasum": ""
             },
             "require": {
@@ -843,10 +786,10 @@
                 "mikey179/vfsstream": "^1.6",
                 "php-coveralls/php-coveralls": "^2.1",
                 "php-cs-fixer/accessible-object": "^1.0",
-                "php-cs-fixer/phpunit-constraint-isidenticalstring": "^1.0.1",
-                "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "^1.0.1",
+                "php-cs-fixer/phpunit-constraint-isidenticalstring": "^1.1",
+                "php-cs-fixer/phpunit-constraint-xmlmatchesxsd": "^1.1",
                 "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1",
-                "phpunitgoodpractices/traits": "^1.5.1",
+                "phpunitgoodpractices/traits": "^1.8",
                 "symfony/phpunit-bridge": "^4.0"
             },
             "suggest": {
@@ -859,6 +802,11 @@
                 "php-cs-fixer"
             ],
             "type": "application",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.15-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "PhpCsFixer\\": "src/"
@@ -890,7 +838,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2019-02-17T17:44:13+00:00"
+            "time": "2019-05-06T07:13:51+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -1194,20 +1142,21 @@
         },
         {
             "name": "hhxsv5/laravel-s",
-            "version": "v3.4.4",
+            "version": "v3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhxsv5/laravel-s.git",
-                "reference": "026abbd3a42865473cab04285c411a197837644a"
+                "reference": "61648189e14c0c774945420f5ad4a75d8675ea2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhxsv5/laravel-s/zipball/026abbd3a42865473cab04285c411a197837644a",
-                "reference": "026abbd3a42865473cab04285c411a197837644a",
+                "url": "https://api.github.com/repos/hhxsv5/laravel-s/zipball/61648189e14c0c774945420f5ad4a75d8675ea2a",
+                "reference": "61648189e14c0c774945420f5ad4a75d8675ea2a",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
+                "ext-pcntl": "*",
                 "php": ">=5.5.9",
                 "symfony/console": ">=2.7.0"
             },
@@ -1261,7 +1210,7 @@
                 "udp",
                 "websocket"
             ],
-            "time": "2019-04-04T09:15:32+00:00"
+            "time": "2019-05-10T08:30:20+00:00"
         },
         {
             "name": "jenssegers/mongodb",
@@ -1331,6 +1280,53 @@
                 "mongodb"
             ],
             "time": "2019-03-12T06:49:10+00:00"
+        },
+        {
+            "name": "kawankoding/laravel-fcm",
+            "version": "0.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kawankoding/laravel-fcm.git",
+                "reference": "b51084bbd3050dcba4633c039fd78f5dbd2630b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kawankoding/laravel-fcm/zipball/b51084bbd3050dcba4633c039fd78f5dbd2630b9",
+                "reference": "b51084bbd3050dcba4633c039fd78f5dbd2630b9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.1.0|~5.2.0|~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "php": "^5.6|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Kawankoding\\Fcm\\FcmServiceProvider"
+                    ],
+                    "aliases": {
+                        "Fcm": "Kawankoding\\Fcm\\FcmFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kawankoding\\Fcm\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Muhammad Amirul Ihsan",
+                    "email": "muh.amirul.ihsan@gmail.com"
+                }
+            ],
+            "description": "A package to send Firebase notification cross Laravel Application",
+            "time": "2019-05-10T07:43:54+00:00"
         },
         {
             "name": "larapie/data-transfer-object",
@@ -1514,16 +1510,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.8.15",
+            "version": "v5.8.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "8a34004aed6ff0aa4072360e3e5bd875edebc223"
+                "reference": "83d57f9f9162ab476c43b9ec00d463ff12c578fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/8a34004aed6ff0aa4072360e3e5bd875edebc223",
-                "reference": "8a34004aed6ff0aa4072360e3e5bd875edebc223",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/83d57f9f9162ab476c43b9ec00d463ff12c578fd",
+                "reference": "83d57f9f9162ab476c43b9ec00d463ff12c578fd",
                 "shasum": ""
             },
             "require": {
@@ -1657,7 +1653,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-04-30T14:05:03+00:00"
+            "time": "2019-05-07T14:37:11+00:00"
         },
         {
             "name": "league/flysystem",
@@ -2088,16 +2084,16 @@
         },
         {
             "name": "opis/closure",
-            "version": "3.1.6",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opis/closure.git",
-                "reference": "ccb8e3928c5c8181c76cdd0ed9366c5bcaafd91b"
+                "reference": "09b4389715a7eec100176ea58286649181753508"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opis/closure/zipball/ccb8e3928c5c8181c76cdd0ed9366c5bcaafd91b",
-                "reference": "ccb8e3928c5c8181c76cdd0ed9366c5bcaafd91b",
+                "url": "https://api.github.com/repos/opis/closure/zipball/09b4389715a7eec100176ea58286649181753508",
+                "reference": "09b4389715a7eec100176ea58286649181753508",
                 "shasum": ""
             },
             "require": {
@@ -2110,7 +2106,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1.x-dev"
+                    "dev-master": "3.2.x-dev"
                 }
             },
             "autoload": {
@@ -2145,7 +2141,7 @@
                 "serialization",
                 "serialize"
             ],
-            "time": "2019-02-22T10:30:00+00:00"
+            "time": "2019-05-05T12:50:25+00:00"
         },
         {
             "name": "orphans/git-deploy-laravel",
@@ -2329,16 +2325,16 @@
         },
         {
             "name": "paragonie/sodium_compat",
-            "version": "v1.9.1",
+            "version": "v1.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/sodium_compat.git",
-                "reference": "87125d5b265f98c4d1b8d83a1f0726607c229421"
+                "reference": "91c1362bb0084c02828d43bbc9ee38831297329e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/87125d5b265f98c4d1b8d83a1f0726607c229421",
-                "reference": "87125d5b265f98c4d1b8d83a1f0726607c229421",
+                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/91c1362bb0084c02828d43bbc9ee38831297329e",
+                "reference": "91c1362bb0084c02828d43bbc9ee38831297329e",
                 "shasum": ""
             },
             "require": {
@@ -2407,7 +2403,7 @@
                 "secret-key cryptography",
                 "side-channel resistant"
             ],
-            "time": "2019-03-20T17:19:05+00:00"
+            "time": "2019-05-09T23:30:36+00:00"
         },
         {
             "name": "php-cs-fixer/diff",
@@ -3238,20 +3234,20 @@
         },
         {
             "name": "stechstudio/laravel-php-cs-fixer",
-            "version": "v1.1.2",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stechstudio/Laravel-PHP-CS-Fixer.git",
-                "reference": "3692bde028e62e4907e3e16a153e449fdfa3b2cd"
+                "reference": "868aa97f4851e5f0a64363124d8812e2af35524c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stechstudio/Laravel-PHP-CS-Fixer/zipball/3692bde028e62e4907e3e16a153e449fdfa3b2cd",
-                "reference": "3692bde028e62e4907e3e16a153e449fdfa3b2cd",
+                "url": "https://api.github.com/repos/stechstudio/Laravel-PHP-CS-Fixer/zipball/868aa97f4851e5f0a64363124d8812e2af35524c",
+                "reference": "868aa97f4851e5f0a64363124d8812e2af35524c",
                 "shasum": ""
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "2.14.*",
+                "friendsofphp/php-cs-fixer": "^2.14",
                 "illuminate/support": "5.4.x|5.5.x|5.6.x|5.7.x|5.8.x",
                 "php": ">=7.0"
             },
@@ -3294,7 +3290,7 @@
                 "php-cs-fixer",
                 "standards"
             ],
-            "time": "2019-02-04T13:24:06+00:00"
+            "time": "2019-05-03T16:05:47+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3572,16 +3568,16 @@
         },
         {
             "name": "symfony/contracts",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/contracts.git",
-                "reference": "1aa7ab2429c3d594dd70689604b5cf7421254cdf"
+                "reference": "d3636025e8253c6144358ec0a62773cae588395b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/contracts/zipball/1aa7ab2429c3d594dd70689604b5cf7421254cdf",
-                "reference": "1aa7ab2429c3d594dd70689604b5cf7421254cdf",
+                "url": "https://api.github.com/repos/symfony/contracts/zipball/d3636025e8253c6144358ec0a62773cae588395b",
+                "reference": "d3636025e8253c6144358ec0a62773cae588395b",
                 "shasum": ""
             },
             "require": {
@@ -3589,19 +3585,22 @@
             },
             "require-dev": {
                 "psr/cache": "^1.0",
-                "psr/container": "^1.0"
+                "psr/container": "^1.0",
+                "symfony/polyfill-intl-idn": "^1.10"
             },
             "suggest": {
                 "psr/cache": "When using the Cache contracts",
                 "psr/container": "When using the Service contracts",
                 "symfony/cache-contracts-implementation": "",
+                "symfony/event-dispatcher-implementation": "",
+                "symfony/http-client-contracts-implementation": "",
                 "symfony/service-contracts-implementation": "",
                 "symfony/translation-contracts-implementation": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -3636,7 +3635,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2018-12-05T08:06:11+00:00"
+            "time": "2019-04-27T14:29:50+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -7022,16 +7021,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.1.3",
+            "version": "8.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2a676677982b484ee36b54961f570c02eabbe7e1"
+                "reference": "b534b017daaef2d7f60c6ee61e6aa2e13fdc6910"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2a676677982b484ee36b54961f570c02eabbe7e1",
-                "reference": "2a676677982b484ee36b54961f570c02eabbe7e1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b534b017daaef2d7f60c6ee61e6aa2e13fdc6910",
+                "reference": "b534b017daaef2d7f60c6ee61e6aa2e13fdc6910",
                 "shasum": ""
             },
             "require": {
@@ -7100,7 +7099,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-04-19T15:52:00+00:00"
+            "time": "2019-05-09T05:13:39+00:00"
         },
         {
             "name": "predis/predis",
@@ -7319,16 +7318,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "4.2.1",
+            "version": "4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "3095910f0f0fb155ac4021fc51a4a7a39ac04e8a"
+                "reference": "f2a2c8e1c97c11ace607a7a667d73d47c19fe404"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/3095910f0f0fb155ac4021fc51a4a7a39ac04e8a",
-                "reference": "3095910f0f0fb155ac4021fc51a4a7a39ac04e8a",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/f2a2c8e1c97c11ace607a7a667d73d47c19fe404",
+                "reference": "f2a2c8e1c97c11ace607a7a667d73d47c19fe404",
                 "shasum": ""
             },
             "require": {
@@ -7368,7 +7367,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2019-04-25T07:55:20+00:00"
+            "time": "2019-05-05T09:05:15+00:00"
         },
         {
             "name": "sebastian/exporter",

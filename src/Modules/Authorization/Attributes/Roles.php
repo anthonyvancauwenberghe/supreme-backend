@@ -13,6 +13,5 @@ interface Roles
     const ADMIN = 'admin';
     const MEMBER = 'member';
     const GUEST = 'guest';
-    const SCRIPTER = 'scripter';
-    const TRUSTED_SCRIPTER = 'scripter.trusted';
+    const SUBSCRIBER = 'subscriber';
 }

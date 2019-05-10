@@ -32,23 +32,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     */
-    public function index(IndexSettingsRequest $request)
-    {
-        return SettingsTransformer::collection($this->service->fromUser($request->user()));
-    }
-
-    /**
-     * Store a newly created Settings in the database.
-     */
-    public function store(CreateSettingsRequest $request)
-    {
-        $settings = $this->service->create(new CreateSettingsData($request), $request->user());
-        return SettingsTransformer::resource($settings);
-    }
-
-    /**
      * Update a Settings.
      */
     public function update(UpdateSettingsRequest $request, $id)
@@ -57,36 +40,9 @@ class SettingsController extends Controller
 
         $this->exists($settings);
         $this->hasAccess($settings);
-        $settings = $this->service->update($id, new UpdateSettingsData($request));
+        $settings = $this->service->update(new UpdateSettingsData($request), $user);
 
         return SettingsTransformer::resource($settings);
     }
 
-    /**
-     * Show the specified resource.
-     */
-    public function show(FindSettingsRequest $request ,$id)
-    {
-        $settings = $this->service->find($id);
-
-        $this->exists($settings);
-        $this->hasAccess($settings);
-
-        return SettingsTransformer::resource($settings);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(DeleteSettingsRequest $request, $id)
-    {
-        $settings = $this->service->find($id);
-
-        $this->exists($settings);
-        $this->hasAccess($settings);
-
-        $this->service->delete($settings);
-
-        return ApiResponse::deleted();
-    }
 }

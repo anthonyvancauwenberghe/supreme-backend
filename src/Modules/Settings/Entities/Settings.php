@@ -3,10 +3,7 @@
 namespace Modules\Settings\Entities;
 
 use Modules\Mongo\Abstracts\MongoModel as Model;
-use Modules\Settings\Policies\SettingsPolicy;
 use Modules\Settings\Attributes\SettingsAttributes;
-use Foundation\Traits\ModelFactory;
-use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Foundation\Contracts\Ownable;
 use Foundation\Traits\HasOwner;
 use Modules\User\Entities\User;
@@ -15,18 +12,13 @@ use Modules\User\Entities\User;
  * Class Settings.
  *
  * @property string $id
+ * @property User|null $user
  */
 class Settings extends Model implements SettingsAttributes, Ownable
 {
-    use ModelFactory, SoftDeletes, HasOwner;
+    use HasOwner;
 
-    protected $policies = [
-        SettingsPolicy::class
-    ];
-
-    protected $observers = [
-
-    ];
+    public $timestamps = false;
 
     /**
      * @var string
@@ -44,13 +36,16 @@ class Settings extends Model implements SettingsAttributes, Ownable
     protected $casts = [];
 
     protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function ownedBy()
     {
-       return User::class;
+        return User::class;
     }
 }

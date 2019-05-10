@@ -8,6 +8,8 @@
         }
     ],
     "require" : {
-        "deviouspk/supreme-parser": "^1.0"
-    }
+        "deviouspk/supreme-parser": "^2.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

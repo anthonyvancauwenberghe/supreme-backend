@@ -12,7 +12,6 @@ use Auth0\Login\Repository\Auth0UserRepository;
 use Modules\Auth0\Contracts\Auth0ServiceContract;
 use Modules\Auth0\Drivers\Auth0UserProfileStorageDriver;
 use Modules\User\Contracts\UserServiceContract;
-use Modules\User\Entities\User;
 use Modules\User\Events\UserRegisteredEvent;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 

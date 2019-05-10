@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Modules\Supreme\Parser;
+namespace Modules\Supreme\Parsers;
 
 use Modules\Supreme\Abstracts\SupremeParser;
 use Modules\Supreme\Factory\SupremeItemsFactory;

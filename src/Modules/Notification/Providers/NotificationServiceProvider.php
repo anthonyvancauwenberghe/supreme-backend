@@ -29,7 +29,5 @@ class NotificationServiceProvider extends ServiceProvider
         $this->app->bind(NotificationServiceContract::class, function () {
             return new NotificationService(new UserService(new UserRepository($this->app)));
         });
-
-        $this->app->register(\LaravelFCM\FCMServiceProvider::class);
     }
 }

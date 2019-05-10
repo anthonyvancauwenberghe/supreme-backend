@@ -13,12 +13,13 @@ use Modules\User\Contracts\UserRepositoryContract;
 use Modules\User\Contracts\UserServiceContract;
 use Modules\User\Entities\User;
 use Modules\User\Events\UserRegisteredEvent;
+use Modules\User\Repositories\UserRepository;
 
 class UserService implements UserServiceContract
 {
 
     /**
-     * @var UserRepositoryContract
+     * @var UserRepository
      */
     protected $repository;
 
@@ -57,7 +58,6 @@ class UserService implements UserServiceContract
         $user = $this->repository->create($data);
         $user->assignRole(Role::MEMBER);
         event(new UserRegisteredEvent($user));
-
         return $user;
     }
 
@@ -70,13 +70,12 @@ class UserService implements UserServiceContract
     {
         $user = new User($data);
         $user->assignRole(Role::MEMBER);
-
         return $user;
     }
 
     public function setRoles($id, array $roles): void
     {
-        if (! in_array(Role::MEMBER, $roles)) {
+        if (!in_array(Role::MEMBER, $roles)) {
             $roles[] = Role::MEMBER;
         }
         $this->find($id)->syncRoles($roles);

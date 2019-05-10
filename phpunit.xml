@@ -41,8 +41,8 @@
         <env name="MAIL_DRIVER" value="array"/>
         <env name="REDIS_DB" value="2"/>
         <env name="REDIS_CACHE_DB" value="3"/>
-        <env name="MONGODB_DB_DATABASE" value="supreme_testing"/>
-        <env name="DB_DATABASE" value="supreme_testing"/>
+        <env name="MONGODB_DB_DATABASE" value="testing"/>
+        <env name="DB_DATABASE" value="testing"/>
         <env name="MODEL_CACHING" value="true"/>
     </php>
 </phpunit>

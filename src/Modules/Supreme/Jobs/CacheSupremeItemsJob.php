@@ -5,7 +5,7 @@ namespace Modules\Supreme\Jobs;
 
 use Cache;
 use Foundation\Abstracts\Jobs\Job;
-use Modules\Supreme\Parser\SupremeStockParser;
+use Modules\Supreme\Parsers\SupremeStockParser;
 use Throwable;
 
 class CacheSupremeItemsJob extends Job

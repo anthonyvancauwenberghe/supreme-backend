@@ -4,27 +4,23 @@
 namespace Modules\Supreme\Listeners;
 
 use Foundation\Abstracts\Listeners\Listener;
+use Modules\Device\Entities\Device;
+use Modules\Device\Entities\DeviceGroup;
 use Modules\Supreme\Events\SupremeItemRestockedEvent;
 use Modules\Wishlist\Entities\Wishlist;
 use Modules\Supreme\Notifications\ItemRestockedNotification;
 
-class NotifyUsersItemRestocked extends Listener
+class SendItemRestockedNotifications extends Listener
 {
     /**
      * @param SupremeItemRestockedEvent $event
      */
     public function handle(SupremeItemRestockedEvent $event): void
     {
-        $wishlistItems = Wishlist::where('size_id', $event->item->sizeId)
-            ->with('user')
-            ->get();
 
-        foreach ($wishlistItems as $wishlistItem) {
-            $user = $wishlistItem->user();
-            if ($user !== null && $user->restocked_notifications)
-                $user->notify(new ItemRestockedNotification($event->item));
-        }
-
+        $devices = new DeviceGroup(Device::all());
+        $devices = $devices->getAllowedRestockNotificationDevices();
+        $devices->notify(new ItemRestockedNotification($event->item));
     }
 
     /**

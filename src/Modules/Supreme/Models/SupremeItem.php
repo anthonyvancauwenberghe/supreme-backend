@@ -12,7 +12,7 @@ use Modules\Supreme\Events\SupremeItemRestockedEvent;
 
 class SupremeItem
 {
-    public $id;
+    public $item_id;
 
     public $styleId;
 
@@ -41,7 +41,7 @@ class SupremeItem
 
     public function __construct(int $id, int $styleId, int $sizeId, string $name, string $category, float $price, string $currency, string $style, string $size, string $region, string $releaseWeek, bool $stock)
     {
-        $this->id = $id;
+        $this->item_id = $id;
         $this->styleId = $styleId;
         $this->sizeId = $sizeId;
         $this->name = $name;
@@ -57,7 +57,7 @@ class SupremeItem
 
     public function store()
     {
-        if (($cachedModel = self::findBySizeId($this->id)) === null) {
+        if (($cachedModel = self::findBySizeId($this->item_id, $this->sizeId)) === null) {
             //NEW ITEM RELEASED
             $this->storeDatabase();
             $this->cacheItem();
@@ -78,27 +78,29 @@ class SupremeItem
 
     protected function cacheItem()
     {
-        Cache::put("supreme:item:size:$this->sizeId", $this, Carbon::now()->addWeek());
+        Cache::put("supreme:item:$this->item_id:size:$this->sizeId", $this, Carbon::now()->addWeek());
     }
 
     protected function storeDatabase()
     {
-        if (SupremeItemDBModel::where('item_id', $this->id)->first() === null) {
+        if (SupremeItemDBModel::where('size_id', $this->sizeId)
+                ->where('item_id',$this->item_id)
+                ->first() === null) {
             $data = $this->toArray();
             unset($data['stock']);
             SupremeItemDBModel::create($data);
         }
     }
 
-    public static function findBySizeId($sizeId): ?self
+    public static function findBySizeId($id, $sizeId): ?self
     {
-        return Cache::get("supreme:item:size:$sizeId");
+        return Cache::get("supreme:item:$id:size:$sizeId");
     }
 
     public function toArray()
     {
         return [
-            "item_id" => $this->id,
+            "item_id" => $this->item_id,
             "style_id" => $this->styleId,
             "size_id" => $this->sizeId,
             "name" => $this->name,

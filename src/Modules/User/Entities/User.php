@@ -11,8 +11,10 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use Jenssegers\Mongodb\Eloquent\HybridRelations;
 use Modules\Authorization\Traits\HasRoles;
 use Modules\Notification\Traits\ReceivesWebNotifications;
+use Modules\Settings\Entities\Settings;
 use Modules\User\Policies\UserPolicy;
 
 /**
@@ -34,9 +36,8 @@ class User extends Model implements AuthorizableContract, AuthenticatableContrac
         Cacheable,
         HasRoles,
         ReceivesWebNotifications,
-        ModelFactory;
-
-    protected $guard_name = "api";
+        ModelFactory,
+        HybridRelations;
 
     protected $policies = [
         UserPolicy::class,
@@ -51,7 +52,7 @@ class User extends Model implements AuthorizableContract, AuthenticatableContrac
      */
     protected $table = 'users';
 
-    protected $with = ['roles', 'permissions'];
+    protected $with = ['roles', 'permissions', 'settings'];
 
     public $cacheTime = 60;
 
@@ -65,4 +66,8 @@ class User extends Model implements AuthorizableContract, AuthenticatableContrac
     protected $casts = [
         'email_verified' => 'bool',
     ];
+
+    public function settings(){
+        return $this->hasOne(Settings::class);
+    }
 }

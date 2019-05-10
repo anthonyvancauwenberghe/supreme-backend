@@ -9,8 +9,8 @@ services:
 addons:
   mariadb: '10.4'
   hosts:
-  - larapi.test
-  - api.larapi.test
+  - supreme.test
+  - api.supreme.test
 
 env:
   global:
@@ -27,7 +27,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-- mysql -e 'CREATE DATABASE larapi_testing;'
+- mysql -u root -e "CREATE DATABASE testing;"
 - echo '' > ./storage/logs/laravel.log
 - pecl uninstall igbinary
 - pecl uninstall redis

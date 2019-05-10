@@ -3,6 +3,9 @@
 namespace Modules\User\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Settings\Contracts\SettingsRepositoryContract;
+use Modules\Settings\Contracts\SettingsServiceContract;
+use Modules\Settings\Services\SettingsService;
 use Modules\User\Contracts\UserRepositoryContract;
 use Modules\User\Contracts\UserServiceContract;
 use Modules\User\Repositories\UserRepository;

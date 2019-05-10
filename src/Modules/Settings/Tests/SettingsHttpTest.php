@@ -8,10 +8,11 @@ use Modules\Settings\Contracts\SettingsServiceContract;
 use Modules\Settings\Entities\Settings;
 use Modules\Settings\Services\SettingsService;
 use Modules\Settings\Transformers\SettingsTransformer;
+use Modules\User\Transformers\UserTransformer;
 
 class SettingsHttpTest extends AuthorizedHttpTest
 {
-    protected $roles = Role::ADMIN;
+    protected $roles = Role::SUBSCRIBER;
 
     /**
      * @var Settings
@@ -31,68 +32,6 @@ class SettingsHttpTest extends AuthorizedHttpTest
     }
 
     /**
-     * Test retrieving all settings.
-     *
-     * @return void
-     */
-    public function testIndexSettings()
-    {
-        $response = $this->http('GET', '/v1/settings');
-        $response->assertStatus(200);
-
-        //TODO assert array rule
-        /*
-        $this->assertEquals(
-            SettingsTransformer::collection($this->service->getByUserId($this->getActingUser()->id))->serialize(),
-            $response->decode()
-        ); */
-    }
-
-    /**
-     * Test retrieving a Settings.
-     *
-     * @return void
-     */
-    public function testFindSettings()
-    {
-        $response = $this->http('GET', '/v1/settings/'.$this->model->id);
-        $response->assertStatus(200);
-
-        $this->getActingUser()->syncRoles(Role::GUEST);
-        $response = $this->http('GET', '/v1/settings/'.$this->model->id);
-        $response->assertStatus(403);
-    }
-
-    /**
-     * Test Settings Deletion.
-     *
-     * @return void
-     */
-    public function testDeleteSettings()
-    {
-        $response = $this->http('DELETE', '/v1/settings/'.$this->model->id);
-        $response->assertStatus(204);
-    }
-
-    /**
-     * Test Settings Creation.
-     *
-     * @return void
-     */
-    public function testCreateSettings()
-    {
-        $model = Settings::fromFactory()->make([]);
-        $response = $this->http('POST', '/v1/settings', $model->toArray());
-        $response->assertStatus(201);
-
-        //TODO ASSERT RESPONSE CONTAINS ATTRIBUTES
-        /*
-        $this->assertArrayHasKey('username', $this->decodeHttpResponse($response));
-        $this->assertArrayHasKey('password', $this->decodeHttpResponse($response));
-        */
-    }
-
-    /**
      * Test Updating a Settings.
      *
      * @return void
@@ -107,5 +46,63 @@ class SettingsHttpTest extends AuthorizedHttpTest
         $this->getActingUser()->syncRoles(Role::GUEST);
         $response = $this->http('PATCH', '/v1/settings/'.$this->model->id, []);
         $response->assertStatus(403);
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testUserHasSettings()
+    {
+        $http = $this->http('GET', '/v1/users/me');
+        $http->assertStatus(200);
+        $httpData = $this->decodeHttpResponse($http);
+
+        $this->assertArrayHasKey('settings', $httpData);
+        $this->assertArrayHasKeys([
+            'checkout_delay',
+            'restock_notifications',
+            'wishlist_notifications',
+            'drop_notifications',
+            'mobile_api',
+            'recaptcha_bypass',
+            'checkout_delay'
+        ], $httpData['settings']);
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testUserHasSlowCheckoutDelay()
+    {
+        $this->getActingUser()->syncRoles(Role::MEMBER);
+
+        $http = $this->http('GET', '/v1/users/me');
+        $http->assertStatus(200);
+        $httpData = $this->decodeHttpResponse($http);
+
+        $this->assertEquals(config('settings.slow_checkout_delay'),$httpData['settings']['checkout_delay']);
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testSubscriberHasNormalCheckoutDelay()
+    {
+        $user = $this->getActingUser();
+        $user->syncRoles(Role::SUBSCRIBER);
+
+        $delay = $user->settings->checkout_delay;
+
+        $http = $this->http('GET', '/v1/users/me');
+        $http->assertStatus(200);
+        $httpData = $this->decodeHttpResponse($http);
+
+        $this->assertEquals($delay, $httpData['settings']['checkout_delay']);
     }
 }

@@ -11,17 +11,17 @@ namespace Modules\User\Transformers;
 use Foundation\Abstracts\Transformers\Transformer;
 use Modules\Account\Transformers\AccountTransformer;
 use Modules\Authorization\Transformers\RoleTransformer;
+use Modules\Settings\Transformers\SettingsTransformer;
 use Modules\User\Entities\User;
 
 class UserTransformer extends Transformer
 {
     public $include = [
         'roles' => RoleTransformer::class,
+        'settings' => SettingsTransformer::class
     ];
 
-    public $available = [
-        'accounts' => AccountTransformer::class,
-    ];
+    public $available = [];
 
     /**
      * Transform the resource into an array.

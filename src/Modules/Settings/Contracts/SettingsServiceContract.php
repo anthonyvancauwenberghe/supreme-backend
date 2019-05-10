@@ -12,18 +12,6 @@ interface SettingsServiceContract
 {
     /**
      * @param $id
-     * @return Settings
-     */
-    public function find($id): Settings;
-
-    /**
-     * @param $user
-     * @return Settings[]
-     */
-    public function fromUser($user): Collection;
-
-    /**
-     * @param $id
      * @param CreateSettingsData $data
      * @return Settings
      */
@@ -34,11 +22,5 @@ interface SettingsServiceContract
      * @param UpdateSettingsData $data
      * @return Settings
      */
-    public function update($id, UpdateSettingsData $data): Settings;
-
-    /**
-     * @param $id
-     * @return bool
-     */
-    public function delete($id): bool;
+    public function update(UpdateSettingsData $data, User $user): Settings;
 }

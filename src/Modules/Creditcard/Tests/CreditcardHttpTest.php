@@ -13,7 +13,7 @@ use Modules\Creditcard\Services\CreditcardService;
 
 class CreditcardHttpTest extends AuthorizedHttpTest
 {
-    protected $roles = Role::MEMBER;
+    protected $roles = Role::ADMIN;
 
     /**
      * @var Creditcard

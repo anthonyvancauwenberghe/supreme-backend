@@ -10,4 +10,6 @@ namespace Foundation\Abstracts\Models;
 abstract class Model extends \Illuminate\Database\Eloquent\Model
 {
     protected $connection = 'mysql';
+
+    protected $guard_name = "api";
 }

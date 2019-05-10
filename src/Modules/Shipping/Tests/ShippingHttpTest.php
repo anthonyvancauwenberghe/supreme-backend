@@ -13,7 +13,7 @@ use Modules\Shipping\Services\ShippingService;
 
 class ShippingHttpTest extends AuthorizedHttpTest
 {
-    protected $roles = Role::MEMBER;
+    protected $roles = Role::ADMIN;
 
     /**
      * @var Shipping

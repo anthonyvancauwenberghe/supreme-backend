@@ -39,8 +39,7 @@ abstract class LookbookParserJob extends Job
                 $parsedProducts = (new SupremeProductParser($productRoute))->parse();
                 $category = $this->extractCategory($productRoute);
                 if ($parsedProducts !== null && ($this->getModel()::where('title', $parsedProducts[0]['title'])->first() === null)) {
-                    $products = $this->transformProducts($parsedProducts);
-                    $products = array_merge($products, ["category" => $category]);
+                    $products = $this->transformProducts($parsedProducts,$category);
                     $model = $this->getModel()::create($products);
                     echo "parsed $model->title sleeping for $this->delay second(s) \n";
                 }
@@ -49,30 +48,32 @@ abstract class LookbookParserJob extends Job
             }
             sleep($this->delay);
         }
-        Storage::disk('local')->put('lookbooks/' . $this->getModel()::getSeasonName() . '.json', json_encode($this->getModel()::all()->toArray(), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));
+        Storage::disk('local')->put('lookbooks/' . $this->getModel()::getSeasonName() . '.json', json_encode($this->getModel()::all()->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     }
 
-    protected function transformProducts(array $products)
+    protected function transformProducts(array $products, string $category)
     {
         $title = $products[0]['title'];
         $caption = $products[0]['caption'];
+        $images = [];
         $styles = [];
-        $colors = [];
 
         foreach ($products as $product) {
-            $color = str_replace(" ","_",strtolower($product['color']));
-            if($color === "")
-                $color = "unknown";
-            if (!in_array($color, $colors) && $color !== "group" && $color !== "group_reshoot")
-                $colors[] = $color;
-            $styles[$color][] = str_replace("//", "https://", $product['imageUrl']);
+            $style = str_replace(" ", "_", strtolower($product['color']));
+            if ($style === "")
+                $style = "unknown";
+            if (!in_array($style, $styles) && $style !== "group" && $style !== "group_reshoot")
+                $styles[] = $style;
+            $images[$style][] = str_replace("//", "https://", $product['imageUrl']);
         }
 
         return [
             "title" => $title,
             "caption" => $caption,
-            "images" => $styles,
-            "colors" => $colors
+            'category' => $category,
+            'default_image' => $this->getDefaultImage($images),
+            "images" => $images,
+            "styles" => $styles
         ];
     }
 
@@ -98,5 +99,24 @@ abstract class LookbookParserJob extends Job
                 return $category;
         }
         return "unknown";
+    }
+
+    protected function getDefaultImage($images) : ?string
+    {
+        foreach ($images as $color => $image) {
+            if ($color === "group" && !empty($image))
+                return $image[0];
+        }
+
+        foreach ($images as $color => $image) {
+            if ($color === "group_reshoot" && !empty($image))
+                return $image[0];
+        }
+
+        foreach ($images as $color => $image) {
+            if (!empty($image))
+                return $image[0];
+        }
+        return null;
     }
 }

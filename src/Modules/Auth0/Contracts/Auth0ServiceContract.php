@@ -8,8 +8,6 @@
 
 namespace Modules\Auth0\Contracts;
 
-use Modules\User\Entities\User;
-
 interface Auth0ServiceContract
 {
 }

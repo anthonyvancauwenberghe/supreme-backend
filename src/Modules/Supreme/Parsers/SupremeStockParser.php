@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Supreme\Parser;
+namespace Modules\Supreme\Parsers;
 
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;

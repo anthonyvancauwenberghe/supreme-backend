@@ -3,7 +3,9 @@
 namespace Modules\Settings\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Settings\Contracts\SettingsRepositoryContract;
 use Modules\Settings\Contracts\SettingsServiceContract;
+use Modules\Settings\Repositories\SettingsRepository;
 use Modules\Settings\Services\SettingsService;
 
 class SettingsServiceProvider extends ServiceProvider
@@ -26,8 +28,13 @@ class SettingsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-                    SettingsServiceContract::class,
-                    SettingsService::class
-                );
+            SettingsServiceContract::class,
+            SettingsService::class
+        );
+
+        $this->app->bind(
+            SettingsRepositoryContract::class,
+            SettingsRepository::class
+        );
     }
 }

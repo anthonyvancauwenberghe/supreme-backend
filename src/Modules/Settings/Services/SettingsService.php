@@ -5,12 +5,11 @@ namespace Modules\Settings\Services;
 use Modules\Settings\Entities\Settings;
 use Modules\Settings\Events\SettingsWasCreatedEvent;
 use Modules\Settings\Events\SettingsWasUpdatedEvent;
-use Modules\Settings\Events\SettingsWasDeletedEvent;
 use Modules\Settings\Contracts\SettingsServiceContract;
 use Modules\Settings\Dtos\CreateSettingsData;
 use Modules\Settings\Dtos\UpdateSettingsData;
 use Modules\Settings\Contracts\SettingsRepositoryContract;
-use Illuminate\Database\Eloquent\Collection;
+use Modules\Settings\Permissions\SettingsPermission;
 use Modules\User\Entities\User;
 
 class SettingsService implements SettingsServiceContract
@@ -31,33 +30,29 @@ class SettingsService implements SettingsServiceContract
     }
 
     /**
-     * @param $id
+     * @param $user
      * @return Settings
      */
-    public function find($id): Settings
-    {
-        return $this->repository->findOrResolve($id);
-    }
-
-    /**
-     * @param $user
-     * @return Settings[]
-     */
-    public function fromUser($user): Collection
+    public function fromUser($user): Settings
     {
         if ($user instanceof User)
             $user = $user->id;
-        return $this->repository->findByField('user_id', $user)->get();
+        return $this->repository->findByField('user_id', $user)->first();
     }
 
     /**
-     * @param $id
      * @param UpdateSettingsData $data
+     * @param User $user
      * @return Settings
      */
-    public function update($id, UpdateSettingsData $data): Settings
+    public function update(UpdateSettingsData $data, User $user): Settings
     {
-        $settings = $this->repository->update($id, $data->toArray());
+        $settings = $this->fromUser($user);
+
+        if(!$user->hasPermissionTo(SettingsPermission::EDIT_CHECKOUT_DELAY))
+            $data->except('checkout_delay');
+
+        $settings->update($data->toArray());
         event(new SettingsWasUpdatedEvent($settings));
         return $settings;
     }
@@ -72,18 +67,5 @@ class SettingsService implements SettingsServiceContract
         $settings = $this->repository->create($data->toArray());
         event(new SettingsWasCreatedEvent($settings));
         return $settings;
-    }
-
-    /**
-     * @param $id
-     * @return bool
-     */
-    public function delete($id): bool
-    {
-        $settings = $this->repository->findOrResolve($id);
-        $deleted = $this->repository->delete($settings);
-        if($deleted)
-            event(new SettingsWasDeletedEvent($settings));
-        return $deleted;
     }
 }
