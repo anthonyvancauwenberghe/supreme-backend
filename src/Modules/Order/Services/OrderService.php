@@ -15,7 +15,6 @@ use Modules\User\Entities\User;
 
 class OrderService implements OrderServiceContract
 {
-
     /**
      * @var OrderRepositoryContract
      */
@@ -31,15 +30,6 @@ class OrderService implements OrderServiceContract
     }
 
     /**
-     * @param $id
-     * @return Order
-     */
-    public function find($id): Order
-    {
-        return $this->repository->findOrResolve($id);
-    }
-
-    /**
      * @param $user
      * @return Order[]
      */
@@ -47,7 +37,7 @@ class OrderService implements OrderServiceContract
     {
         if ($user instanceof User)
             $user = $user->id;
-        return $this->repository->findByField('user_id', $user)->get();
+        return $this->repository->findByField('user_id', $user);
     }
 
     /**

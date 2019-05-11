@@ -35,12 +35,14 @@ class DeviceService implements DeviceServiceContract
      * @param User $user
      * @return Device
      */
-    public function find($id, User $user): Device
+    public function find($id, User $user): ?Device
     {
+        if($id instanceof Device)
+            return $id;
         return $this->repository->findWhere([
             "device_id" => $id,
             "user_id" => $user->id
-        ], $user)->first();
+        ])->first();
     }
 
     /**
@@ -51,7 +53,7 @@ class DeviceService implements DeviceServiceContract
     {
         if ($user instanceof User)
             $user = $user->id;
-        return $this->repository->findByField('user_id', $user)->get();
+        return $this->repository->findByField('user_id', $user);
     }
 
     /**

@@ -5,26 +5,18 @@ namespace Modules\Supreme\Tests;
 
 
 use Foundation\Abstracts\Tests\TestCase;
+use Modules\Supreme\Cache\SupremeDropListCache;
 use Modules\Supreme\Entities\SupremeItemDBModel;
+use Supreme\Parser\SupremeCommunityLatestDroplistParser;
+
 class SupremeTest extends TestCase
 {
-    public function testSupremeApiGetting()
+    public function testSupremeDroplistCaching()
     {
-        \Artisan::call('supreme:parse', ['region' => 'EU']);
+        $this->markTestSkipped();
 
-        $items = SupremeItemDBModel::all();
-
-        $categories = [];
-
-        foreach ($items as $item) {
-            if (!array_key_exists($item->category, $categories))
-                $categories[$item->category][] = $item->size;
-            elseif (!in_array($item->size, $categories[$item->category]))
-                $categories[$item->category][] = $item->size;
-        }
-
-        \Storage::disk('local')
-            ->put('categories.json',
-                json_encode($categories,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $parser = new SupremeCommunityLatestDroplistParser(2,true);
+        $items = $parser->parse();
+        $this->assertNotEmpty($items);
     }
 }

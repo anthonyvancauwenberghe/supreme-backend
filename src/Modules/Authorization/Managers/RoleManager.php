@@ -13,6 +13,7 @@ use Modules\Authorization\Roles\AdminRole;
 use Modules\Authorization\Roles\GuestRole;
 use Modules\Authorization\Roles\MemberRole;
 use Modules\Authorization\Roles\ScripterRole;
+use Modules\Authorization\Roles\SubscriberRole;
 
 class RoleManager
 {
@@ -22,7 +23,8 @@ class RoleManager
     const ROLES = [
         MemberRole::class,
         GuestRole::class,
-        AdminRole::class
+        AdminRole::class,
+        SubscriberRole::class
     ];
 
     public static function member(): MemberRole
@@ -38,5 +40,10 @@ class RoleManager
     public static function guest(): GuestRole
     {
         return GuestRole::singleton();
+    }
+
+    public static function subscriber(): SubscriberRole
+    {
+        return SubscriberRole::singleton();
     }
 }

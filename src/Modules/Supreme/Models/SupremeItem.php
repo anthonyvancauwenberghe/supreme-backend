@@ -78,7 +78,7 @@ class SupremeItem
 
     protected function cacheItem()
     {
-        Cache::put("supreme:item:$this->item_id:size:$this->sizeId", $this, Carbon::now()->addWeek());
+        Cache::put("supreme:items:$this->item_id:size:$this->sizeId", $this, Carbon::now()->addWeek());
     }
 
     protected function storeDatabase()
@@ -94,7 +94,7 @@ class SupremeItem
 
     public static function findBySizeId($id, $sizeId): ?self
     {
-        return Cache::get("supreme:item:$id:size:$sizeId");
+        return Cache::get("supreme:items:$id:size:$sizeId");
     }
 
     public function toArray()

@@ -18,16 +18,11 @@ class SubscriberRole extends AbstractRole
 {
     protected $role = Role::SUBSCRIBER;
 
-    protected $permissions = [
-        WishlistPermission::INDEX_WISHLIST,
-        WishlistPermission::SHOW_WISHLIST,
-        WishlistPermission::CREATE_WISHLIST,
-        WishlistPermission::UPDATE_WISHLIST,
-        WishlistPermission::DELETE_WISHLIST,
+    public function permissions()
+    {
+        $permissions = MemberRole::getPermissions();
+        $additionalPermissions = [];
 
-        LookbookPermissions::ACCESS_LOOKBOOK,
-
-        SettingsPermission::UPDATE_SETTINGS,
-        SettingsPermission::EDIT_CHECKOUT_DELAY
-    ];
+        return array_merge($permissions, $additionalPermissions);
+    }
 }

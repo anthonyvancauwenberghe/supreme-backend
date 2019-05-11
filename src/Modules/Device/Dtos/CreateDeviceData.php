@@ -32,19 +32,4 @@ class CreateDeviceData extends Dto
      * @var bool
      */
     public $notify_drop = false;
-
-    /**
-     * @var bool
-     */
-    public $mobile_api = false;
-
-    /**
-     * @var bool
-     */
-    public $recaptcha_bypass = false;
-
-    /**
-     * @var float
-     */
-    public $checkout_delay = 3.0;
 }

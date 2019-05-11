@@ -19,7 +19,6 @@ class UserRegisteredEvent extends Event
 {
     public $listeners = [
         AssignRoleToNewlyRegisteredUser::class,
-        CreateSettingsForNewlyRegisteredUser::class,
         SendNewlyRegisteredUserWelcomeNotification::class,
     ];
 

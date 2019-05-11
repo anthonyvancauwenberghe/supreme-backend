@@ -5,6 +5,7 @@ namespace Modules\User\Entities;
 use Foundation\Abstracts\Models\Model;
 use Foundation\Contracts\Ownable;
 use Foundation\Traits\Cacheable;
+use Foundation\Traits\HasOwner;
 use Foundation\Traits\ModelFactory;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -36,8 +37,7 @@ class User extends Model implements AuthorizableContract, AuthenticatableContrac
         Cacheable,
         HasRoles,
         ReceivesWebNotifications,
-        ModelFactory,
-        HybridRelations;
+        ModelFactory;
 
     protected $policies = [
         UserPolicy::class,
@@ -52,7 +52,7 @@ class User extends Model implements AuthorizableContract, AuthenticatableContrac
      */
     protected $table = 'users';
 
-    protected $with = ['roles', 'permissions', 'settings'];
+    protected $with = ['roles', 'permissions'];
 
     public $cacheTime = 60;
 
@@ -67,7 +67,8 @@ class User extends Model implements AuthorizableContract, AuthenticatableContrac
         'email_verified' => 'bool',
     ];
 
-    public function settings(){
-        return $this->hasOne(Settings::class);
+    public function ownedBy()
+    {
+       return User::class;
     }
 }

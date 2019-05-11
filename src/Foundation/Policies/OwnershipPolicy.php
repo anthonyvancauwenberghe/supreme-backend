@@ -23,39 +23,42 @@ class OwnershipPolicy extends Policy implements ModelPolicyContract
     /**
      * Determine if the given user can access the model.
      *
-     * @param User $user
+     * @param User $owner
      *
      * @throws Exception
      *
      * @return bool
      */
-    public function access($user, $model): bool
+    public function access($owner, $ownable): bool
     {
-        return $this->userIsModelOwner($user, $model);
+        return $this->isOwner($owner, $ownable);
     }
 
     /**
-     * @param User    $user
+     * @param User $user
      * @param Ownable $model
      *
      * @throws Exception
      *
      * @return bool
      */
-    protected function userIsModelOwner(User $user, Ownable $model): bool
+    protected function isOwner($owner, $model): bool
     {
-        if (class_implements_interface($model->ownedBy(), Authenticatable::class)) {
-            return $user->id === $model->ownerId();
+        if ($owner instanceof $model) {
+            return $owner->getKey() === $model->getKey();
+        } elseif (class_implements_interface($model, Ownable::class)) {
+            $ownerModel = $model->ownedBy();
+            $ownable = $ownerModel::find($model->ownerId());
+
+            if ($ownable === null) {
+                throw new Exception("Recursive ownershippolicy lookup failed. Owner model does not exist so couldn't resolve the model owner");
+            }
+            elseif ($ownable instanceof $owner || class_implements_interface($ownable, Ownable::class)){
+                return $this->isOwner($owner, $ownable);
+            }
         }
 
-        $ownerModel = $model->ownedBy();
-        $owner = $ownerModel::find($model->ownerId());
-
-        if (class_implements_interface($owner, Ownable::class)) {
-            return $this->userIsModelOwner($user, $owner);
-        }
-
-        throw new Exception("recursive ownershippolicy lookup failed. Not all models implemented ownable so couldn't identify if user owned model");
+        throw new Exception("Recursive ownershippolicy lookup failed. Not all models implemented the ownable interface so couldn't resolve the model owner");
     }
 
     /**
@@ -100,7 +103,7 @@ class OwnershipPolicy extends Policy implements ModelPolicyContract
      * @param $ability
      *
      * @return bool|null
-    */
+     */
     public function before($user, $ability)
     {
         if ($user->isAdmin()) {

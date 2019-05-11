@@ -3,7 +3,9 @@
 namespace Modules\Device\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Device\Contracts\DeviceRepositoryContract;
 use Modules\Device\Contracts\DeviceServiceContract;
+use Modules\Device\Repositories\DeviceRepository;
 use Modules\Device\Services\DeviceService;
 use Modules\Device\Services\FirebaseMessagingService;
 
@@ -26,11 +28,15 @@ class DeviceServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(FirebaseMessagingService::class);
-        $this->app->alias(FirebaseMessagingService::class, 'firebase');
+
         $this->app->bind(
             DeviceServiceContract::class,
             DeviceService::class
+        );
+
+        $this->app->bind(
+            DeviceRepositoryContract::class,
+            DeviceRepository::class
         );
     }
 }

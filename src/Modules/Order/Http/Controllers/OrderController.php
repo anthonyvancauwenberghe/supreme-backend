@@ -36,7 +36,8 @@ class OrderController extends Controller
      */
     public function index(IndexOrderRequest $request)
     {
-        return OrderTransformer::collection($this->service->fromUser($request->user()));
+        $data = $this->service->fromUser($request->user());
+        return OrderTransformer::collection($data);
     }
 
     /**

@@ -5,13 +5,14 @@ namespace Modules\Device\Tests;
 use Modules\Auth0\Abstracts\AuthorizedHttpTest;
 use Modules\Authorization\Entities\Role;
 use Modules\Device\Contracts\DeviceServiceContract;
+use Modules\Device\Dtos\CreateDeviceData;
 use Modules\Device\Entities\Device;
 use Modules\Device\Services\DeviceService;
 use Modules\Device\Transformers\DeviceTransformer;
 
 class DeviceHttpTest extends AuthorizedHttpTest
 {
-    protected $roles = Role::ADMIN;
+    protected $roles = Role::MEMBER;
 
     /**
      * @var Device
@@ -26,8 +27,8 @@ class DeviceHttpTest extends AuthorizedHttpTest
     protected function seedData()
     {
         parent::seedData();
-        $this->model = factory(Device::class)->create(['user_id' => $this->getActingUser()->id]);
         $this->service = $this->app->make(DeviceServiceContract::class);
+        $this->model = $this->service->create(CreateDeviceData::fromFactory(Device::class), $this->getActingUser());
     }
 
     /**
@@ -37,15 +38,13 @@ class DeviceHttpTest extends AuthorizedHttpTest
      */
     public function testIndexDevices()
     {
+        $this->getActingUser()->syncRoles(Role::ADMIN);
         $response = $this->http('GET', '/v1/devices');
         $response->assertStatus(200);
 
-        //TODO assert array rule
-        /*
-        $this->assertEquals(
-            DeviceTransformer::collection($this->service->getByUserId($this->getActingUser()->id))->serialize(),
-            $response->decode()
-        ); */
+        $this->getActingUser()->syncRoles([Role::SUBSCRIBER, Role::MEMBER]);
+        $response = $this->http('GET', '/v1/devices');
+        $response->assertStatus(403);
     }
 
     /**
@@ -55,11 +54,11 @@ class DeviceHttpTest extends AuthorizedHttpTest
      */
     public function testFindDevice()
     {
-        $response = $this->http('GET', '/v1/devices/'.$this->model->id);
+        $response = $this->http('GET', '/v1/devices/' . $this->model->device_id);
         $response->assertStatus(200);
 
         $this->getActingUser()->syncRoles(Role::GUEST);
-        $response = $this->http('GET', '/v1/devices/'.$this->model->id);
+        $response = $this->http('GET', '/v1/devices/' . $this->model->device_id);
         $response->assertStatus(403);
     }
 
@@ -70,7 +69,11 @@ class DeviceHttpTest extends AuthorizedHttpTest
      */
     public function testDeleteDevice()
     {
-        $response = $this->http('DELETE', '/v1/devices/'.$this->model->id);
+        $response = $this->http('DELETE', '/v1/devices/' . $this->model->device_id);
+        $response->assertStatus(403);
+
+        $this->getActingUser()->syncRoles(Role::ADMIN);
+        $response = $this->http('DELETE', '/v1/devices/' . $this->model->device_id);
         $response->assertStatus(204);
     }
 
@@ -85,11 +88,13 @@ class DeviceHttpTest extends AuthorizedHttpTest
         $response = $this->http('POST', '/v1/devices', $model->toArray());
         $response->assertStatus(201);
 
-        //TODO ASSERT RESPONSE CONTAINS ATTRIBUTES
-        /*
-        $this->assertArrayHasKey('username', $this->decodeHttpResponse($response));
-        $this->assertArrayHasKey('password', $this->decodeHttpResponse($response));
-        */
+        $this->assertArrayHasKeys([
+            'device_id',
+            'device_type',
+            'notify_restock',
+            'notify_wishlist',
+            'notify_drop'
+        ], $this->decodeHttpResponse($response));
     }
 
     /**
@@ -100,12 +105,12 @@ class DeviceHttpTest extends AuthorizedHttpTest
     public function testUpdateDevice()
     {
         /* Test response for a normal user */
-        $response = $this->http('PATCH', '/v1/devices/'.$this->model->id, []);
+        $response = $this->http('PATCH', '/v1/devices/' . $this->model->device_id, []);
         $response->assertStatus(200);
 
         /* Test response for a guest user */
         $this->getActingUser()->syncRoles(Role::GUEST);
-        $response = $this->http('PATCH', '/v1/devices/'.$this->model->id, []);
+        $response = $this->http('PATCH', '/v1/devices/' . $this->model->device_id, []);
         $response->assertStatus(403);
     }
 }

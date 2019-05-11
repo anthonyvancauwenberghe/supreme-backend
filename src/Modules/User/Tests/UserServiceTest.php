@@ -37,14 +37,4 @@ class UserServiceTest extends TestCase
        $this->assertTrue($this->user->hasRole($defaultRole));
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testNewUserHasSettings()
-    {
-        $this->assertNotNull($this->user->settings);
-    }
-
 }

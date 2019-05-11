@@ -29,12 +29,6 @@ interface WishlistServiceContract
      */
     public function create(CreateWishlistData $data, User $user): Wishlist;
 
-    /**
-     * @param $id
-     * @param UpdateWishlistData $data
-     * @return Wishlist
-     */
-    public function update($id, UpdateWishlistData $data): Wishlist;
 
     /**
      * @param $id

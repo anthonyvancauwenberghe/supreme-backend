@@ -49,20 +49,6 @@ class WishlistController extends Controller
     }
 
     /**
-     * Update a Wishlist.
-     */
-    public function update(UpdateWishlistRequest $request, $id)
-    {
-        $wishlist = $this->service->find($id);
-
-        $this->exists($wishlist);
-        $this->hasAccess($wishlist);
-        $wishlist = $this->service->update($id, new UpdateWishlistData($request));
-
-        return WishlistTransformer::resource($wishlist);
-    }
-
-    /**
      * Show the specified resource.
      */
     public function show(FindWishlistRequest $request ,$id)

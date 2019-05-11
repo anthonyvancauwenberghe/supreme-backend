@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'use' => 'default',
+    'use' => 'queue',
 
     /*
     |--------------------------------------------------------------------------
@@ -87,7 +87,7 @@ return [
 
     'environments' => [
         'production' => [
-            'supervisor-1' => [
+            'production_queue' => [
                 'connection' => 'redis',
                 'queue' => ['default'],
                 'balance' => 'simple',
@@ -97,11 +97,11 @@ return [
         ],
 
         'local' => [
-            'supervisor-1' => [
-                'connection' => 'redis',
+            'local_queue' => [
+                'connection' => 'redis_queue',
                 'queue' => ['default'],
                 'balance' => 'simple',
-                'processes' => 3,
+                'processes' => 5,
                 'tries' => 3,
             ],
         ],

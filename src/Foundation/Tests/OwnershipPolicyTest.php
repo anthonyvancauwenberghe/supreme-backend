@@ -11,7 +11,7 @@ class OwnershipPolicyTest extends TestCase
     {
         $user = $this->actAsRandomUser();
         $user2 = User::fromFactory()->create();
-        $this->assertTrue($user->can('access', get_authenticated_user()));
-        $this->assertFalse($user2->can('access', get_authenticated_user()));
+        $this->assertTrue($user->can('access', $user));
+        $this->assertFalse($user2->can('access', $user));
     }
 }

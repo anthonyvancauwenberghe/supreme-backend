@@ -39,39 +39,6 @@ class OrderHttpTest extends AuthorizedHttpTest
     {
         $response = $this->http('GET', '/v1/orders');
         $response->assertStatus(200);
-
-        //TODO assert array rule
-        /*
-        $this->assertEquals(
-            OrderTransformer::collection($this->service->getByUserId($this->getActingUser()->id))->serialize(),
-            $response->decode()
-        ); */
-    }
-
-    /**
-     * Test retrieving a Order.
-     *
-     * @return void
-     */
-    public function testFindOrder()
-    {
-        $response = $this->http('GET', '/v1/orders/'.$this->model->id);
-        $response->assertStatus(200);
-
-        $this->getActingUser()->syncRoles(Role::GUEST);
-        $response = $this->http('GET', '/v1/orders/'.$this->model->id);
-        $response->assertStatus(403);
-    }
-
-    /**
-     * Test Order Deletion.
-     *
-     * @return void
-     */
-    public function testDeleteOrder()
-    {
-        $response = $this->http('DELETE', '/v1/orders/'.$this->model->id);
-        $response->assertStatus(204);
     }
 
     /**
@@ -84,28 +51,5 @@ class OrderHttpTest extends AuthorizedHttpTest
         $model = Order::fromFactory()->make([]);
         $response = $this->http('POST', '/v1/orders', $model->toArray());
         $response->assertStatus(201);
-
-        //TODO ASSERT RESPONSE CONTAINS ATTRIBUTES
-        /*
-        $this->assertArrayHasKey('username', $this->decodeHttpResponse($response));
-        $this->assertArrayHasKey('password', $this->decodeHttpResponse($response));
-        */
-    }
-
-    /**
-     * Test Updating a Order.
-     *
-     * @return void
-     */
-    public function testUpdateOrder()
-    {
-        /* Test response for a normal user */
-        $response = $this->http('PATCH', '/v1/orders/'.$this->model->id, []);
-        $response->assertStatus(200);
-
-        /* Test response for a guest user */
-        $this->getActingUser()->syncRoles(Role::GUEST);
-        $response = $this->http('PATCH', '/v1/orders/'.$this->model->id, []);
-        $response->assertStatus(403);
     }
 }

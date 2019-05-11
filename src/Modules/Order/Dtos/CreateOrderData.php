@@ -20,4 +20,19 @@ class CreateOrderData extends Dto
      * @var int $size_id
      */
     public $size_id;
+
+    /**
+     * @var bool
+     */
+    public $mobile_api;
+
+    /**
+     * @var bool
+     */
+    public $recaptcha_bypass;
+
+    /**
+     * @var float|int
+     */
+    public $checkout_delay;
 }

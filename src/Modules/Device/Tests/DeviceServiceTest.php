@@ -28,9 +28,4 @@ class DeviceServiceTest extends TestCase
     {
         $this->assertNotEmpty($this->models->toArray());
     }
-
-    public function testFirebaseFacade(){
-        Firebase::send();
-        $this->assertTrue(true);
-    }
 }

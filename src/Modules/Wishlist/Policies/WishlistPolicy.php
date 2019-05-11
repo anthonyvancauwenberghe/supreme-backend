@@ -27,15 +27,15 @@ class WishlistPolicy extends OwnershipPolicy
     /**
      * Determine if the given user can access the model.
      *
-     * @param User $user
+     * @param User $owner
      *
      * @throws Exception
      *
      * @return bool
      */
-    public function access($user, $model): bool
+    public function access($owner, $ownable): bool
     {
-        return parent::access($user, $model);
+        return parent::access($owner, $ownable);
     }
 
     /**

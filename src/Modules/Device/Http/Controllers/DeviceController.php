@@ -53,11 +53,11 @@ class DeviceController extends Controller
      */
     public function update(UpdateDeviceRequest $request, $id)
     {
-        $device = $this->service->find($id);
+        $device = $this->service->find($id, $request->user());
 
         $this->exists($device);
         $this->hasAccess($device);
-        $device = $this->service->update($id, new UpdateDeviceData($request));
+        $device = $this->service->update($id, $request->user(), new UpdateDeviceData($request));
 
         return DeviceTransformer::resource($device);
     }
@@ -67,7 +67,7 @@ class DeviceController extends Controller
      */
     public function show(FindDeviceRequest $request ,$id)
     {
-        $device = $this->service->find($id);
+        $device = $this->service->find($id, $request->user());
 
         $this->exists($device);
         $this->hasAccess($device);
@@ -80,7 +80,7 @@ class DeviceController extends Controller
      */
     public function destroy(DeleteDeviceRequest $request, $id)
     {
-        $device = $this->service->find($id);
+        $device = $this->service->find($id, $request->user());
 
         $this->exists($device);
         $this->hasAccess($device);

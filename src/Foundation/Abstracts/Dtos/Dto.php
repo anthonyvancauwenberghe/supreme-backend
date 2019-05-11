@@ -21,9 +21,9 @@ class Dto extends DataTransferObject
      * @param string $model
      * @return static
      */
-    public static function fromFactory(string $model)
+    public static function fromFactory(string $model, array $additionalData = [])
     {
-        return new static(factory($model)->raw());
+        return new static(factory($model)->raw([]));
     }
 
     public static function make(array $data)

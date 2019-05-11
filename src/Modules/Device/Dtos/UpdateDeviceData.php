@@ -24,22 +24,4 @@ class UpdateDeviceData extends Dto
      * @Optional
      */
     public $notify_drop;
-
-    /**
-     * @var bool
-     * @Optional
-     */
-    public $mobile_api;
-
-    /**
-     * @var bool
-     * @Optional
-     */
-    public $recaptcha_bypass;
-
-    /**
-     * @var float
-     * @Optional
-     */
-    public $checkout_delay;
 }

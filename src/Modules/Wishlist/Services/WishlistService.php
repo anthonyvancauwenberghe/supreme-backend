@@ -51,18 +51,6 @@ class WishlistService implements WishlistServiceContract
     }
 
     /**
-     * @param $id
-     * @param UpdateWishlistData $data
-     * @return Wishlist
-     */
-    public function update($id, UpdateWishlistData $data): Wishlist
-    {
-        $wishlist = $this->repository->update($id, $data->toArray());
-        event(new WishlistWasUpdatedEvent($wishlist));
-        return $wishlist;
-    }
-
-    /**
      * @param CreateWishlistData $data
      * @return Wishlist
      */

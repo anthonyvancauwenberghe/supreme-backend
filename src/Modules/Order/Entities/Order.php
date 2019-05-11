@@ -51,6 +51,11 @@ class Order extends Model implements OrderAttributes, Ownable
 
     public function ownedBy()
     {
-       return User::class;
+        return User::class;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

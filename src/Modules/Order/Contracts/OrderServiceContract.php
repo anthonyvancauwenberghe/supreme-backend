@@ -11,12 +11,6 @@ use Modules\User\Entities\User;
 interface OrderServiceContract
 {
     /**
-     * @param $id
-     * @return Order
-     */
-    public function find($id): Order;
-
-    /**
      * @param $user
      * @return Order[]
      */

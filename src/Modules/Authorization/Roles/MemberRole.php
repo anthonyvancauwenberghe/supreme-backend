@@ -11,6 +11,8 @@ namespace Modules\Authorization\Roles;
 use Modules\Authorization\Abstracts\AbstractRole;
 use Modules\Authorization\Entities\Role;
 use Modules\Creditcard\Permissions\CreditcardPermission;
+use Modules\Device\Permissions\DevicePermission;
+use Modules\Order\Permissions\OrderPermission;
 use Modules\Shipping\Permissions\ShippingPermission;
 use Modules\Wishlist\Permissions\WishlistPermission;
 
@@ -20,9 +22,13 @@ class MemberRole extends AbstractRole
 
     protected $permissions = [
         WishlistPermission::INDEX_WISHLIST,
-        WishlistPermission::SHOW_WISHLIST,
         WishlistPermission::CREATE_WISHLIST,
-        WishlistPermission::UPDATE_WISHLIST,
         WishlistPermission::DELETE_WISHLIST,
+
+        OrderPermission::CREATE_ORDER,
+
+        DevicePermission::SHOW_DEVICE,
+        DevicePermission::CREATE_DEVICE,
+        DevicePermission::UPDATE_DEVICE
     ];
 }

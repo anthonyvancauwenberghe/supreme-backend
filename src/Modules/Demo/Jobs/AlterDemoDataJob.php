@@ -15,16 +15,10 @@ use Modules\Auth0\Traits\Auth0TestUser;
 
 class AlterDemoDataJob extends Job
 {
-    use Auth0TestUser;
-
-    /**
-     * @var Auth0Service
-     */
-    protected $userService;
 
     public function __construct()
     {
-        $this->userService = app()->make(Auth0ServiceContract::class);
+
     }
 
     public function handle()

@@ -47,7 +47,7 @@ class $CLASS$ implements $CLASS$Contract
     {
         if ($user instanceof User)
             $user = $user->id;
-        return $this->repository->findByField('user_id', $user)->get();
+        return $this->repository->findByField('user_id', $user);
     }
 
     /**

@@ -15,7 +15,7 @@ interface DeviceServiceContract
      * @param User $user
      * @return Device
      */
-    public function find($id, User $user): Device;
+    public function find($id, User $user): ?Device;
 
     /**
      * @param $user

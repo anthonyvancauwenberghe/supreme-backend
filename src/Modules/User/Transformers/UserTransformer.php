@@ -17,8 +17,7 @@ use Modules\User\Entities\User;
 class UserTransformer extends Transformer
 {
     public $include = [
-        'roles' => RoleTransformer::class,
-        'settings' => SettingsTransformer::class
+        'roles' => RoleTransformer::class
     ];
 
     public $available = [];
