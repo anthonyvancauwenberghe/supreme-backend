@@ -10,11 +10,10 @@ namespace Modules\Order\Listeners;
 
 use DiscordWebhooks\Client;
 use DiscordWebhooks\Embed;
-use Foundation\Abstracts\Listeners\Listener;
+use Foundation\Abstracts\Listeners\QueuedListener;
+use Modules\Order\Events\OrderWasCreatedEvent;
 
-use Modules\Order\Events\OrderWasSuccessfulEvent;
-
-class SendOrderToDiscord extends Listener
+class SendOrderToDiscord extends QueuedListener
 {
     protected $discord;
 
@@ -28,26 +27,26 @@ class SendOrderToDiscord extends Listener
 
 
     /**
-     * @param OrderWasSuccessfulEvent $event
+     * @param OrderWasCreatedEvent $event
      */
-    public function handle(OrderWasSuccessfulEvent $event): void
+    public function handle(OrderWasCreatedEvent $event): void
     {
         $embed = new Embed();
         $itemName = $event->order->item_id;
         $apiType = $event->order->mobile_api ? "mobile" : "desktop";
         $delay = $event->order->checkout_delay;
-        $message = "Item $itemName was bought with the $apiType api and a checkout delay of " . $delay . " seconds";
+        $status = $event->order->status ;
+        $message = "Order was placed for item $itemName with the $apiType api and a checkout delay of " . $delay . " seconds";
         $embed->description($message);
-
         $this->discord
             ->username('Server')
-            ->message("New Successful order!")
+            ->message("New order! Status: $status")
             ->embed($embed)
             ->send();
     }
 
     /**
-     * @param OrderWasSuccessfulEvent $event
+     * @param OrderWasCreatedEvent $event
      * @param $exception
      */
     public function failed($event, $exception): void

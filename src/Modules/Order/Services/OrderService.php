@@ -48,9 +48,6 @@ class OrderService implements OrderServiceContract
         $data->with('user_id', $user->id);
         $order = $this->repository->create($data->toArray());
 
-        if ($order->status === "SUCCESS")
-            event(new OrderWasSuccessfulEvent($order));
-
         event(new OrderWasCreatedEvent($order));
         return $order;
     }
