@@ -32,19 +32,23 @@ class SendOrderToDiscord extends QueuedListener
     public function handle(OrderWasCreatedEvent $event): void
     {
         $embed = new Embed();
-        $itemName = $event->order->item_id;
-        $style = $event->order->style_id;
-        $size = $event->order->size_id;
+        $itemName = $event->order->item_name;
+        $style = $event->order->item_style;
+        $size = $event->order->item_size;
         $region = $event->order->region;
         $apiType = $event->order->mobile_api ? "mobile" : "desktop";
         $delay = $event->order->checkout_delay;
-        $status = $event->order->status ;
+        $duration = $event->order->checkout_duration;
+        $status = $event->order->status;
        // $message = "Order was placed for item $itemName with the $apiType api and a checkout delay of " . $delay . " seconds";
         $embed
-            ->title("Item: $itemName | Style: $style | Size: $size")
+            ->title("Item: $itemName | Style: $style | Size: $size", $event->order->item_url)
+            ->image($event->order->image_url)
+            ->thumbnail($event->order->image_url)
             ->footer("Supremewatcher.io",'http://chittagongit.com/download/315864')
             ->field("Api Type", $apiType,true)
             ->field("Checkout Delay", (string) $delay,true)
+            ->field("Checked out in", (string) $duration . " sec",true)
             ->description("A new order was placed through supremewatcher!");
 
         $this->discord
