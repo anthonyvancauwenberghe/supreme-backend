@@ -22,6 +22,11 @@ class CreateOrderData extends Dto
     public $size_id;
 
     /**
+     * @var string $region
+     */
+    public $region;
+
+    /**
      * @var bool
      */
     public $mobile_api;

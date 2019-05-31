@@ -9,6 +9,7 @@ $factory->define(Order::class, function (Faker $faker) {
         "style_id" => $faker->randomNumber(),
         "size_id" => $faker->randomNumber(),
         "mobile_api" => $faker->boolean,
+        "region" => $faker->randomElement(['US','EU','JP']),
         "recaptcha_bypass" => $faker->boolean,
         "checkout_delay" => $faker->randomFloat(1,0,20),
         "status" => $faker->randomElement(['SUCCESS','ROBOT','FAILED'])

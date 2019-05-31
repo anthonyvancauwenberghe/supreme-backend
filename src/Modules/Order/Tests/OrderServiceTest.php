@@ -5,6 +5,7 @@ namespace Modules\Order\Tests;
 use Foundation\Abstracts\Tests\TestCase;
 use Foundation\Traits\DispatchedEvents;
 use Modules\Order\Entities\Order;
+use Modules\Order\Events\OrderWasCreatedEvent;
 use Modules\Order\Events\OrderWasSuccessfulEvent;
 
 class OrderServiceTest extends TestCase
@@ -32,7 +33,7 @@ class OrderServiceTest extends TestCase
 
     public function testOrderNotificationToDiscord(){
         $order = Order::fromFactory()->create();
-        event(new OrderWasSuccessfulEvent($order));
+        event(new OrderWasCreatedEvent($order));
 
         $this->assertTrue(true);
     }
