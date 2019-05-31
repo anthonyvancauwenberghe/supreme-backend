@@ -35,4 +35,9 @@ class CreateOrderData extends Dto
      * @var float|int
      */
     public $checkout_delay;
+
+    /**
+     * @var string
+     */
+    public $status;
 }

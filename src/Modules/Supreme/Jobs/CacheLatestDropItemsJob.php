@@ -17,7 +17,7 @@ class CacheLatestDropItemsJob extends LockingJob
 
     public function execute()
     {
-        $parser = new SupremeCommunityLatestDroplistParser(2,false);
+        $parser = new SupremeCommunityLatestDroplistParser(2,true);
         $items = $parser->parse();
 
         SupremeDropListCache::put($items);

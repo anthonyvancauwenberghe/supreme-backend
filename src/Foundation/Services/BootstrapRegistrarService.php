@@ -213,7 +213,8 @@ class BootstrapRegistrarService
         foreach ($module->getEvents()->getClasses() as $eventClass) {
             $listeners = [];
             foreach (get_class_property($eventClass, 'listeners') ?? [] as $listenerClass) {
-                if (instance_without_constructor($listenerClass) instanceof Listener) {
+                $listener = instance_without_constructor($listenerClass);
+                if (method_exists($listener, 'handle')) {
                     $listeners[] = $listenerClass;
                 }
             }

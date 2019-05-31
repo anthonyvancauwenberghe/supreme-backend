@@ -12,7 +12,8 @@ class OrderWasDeletedEvent extends Event
      * The listeners that will be fired when the event is dispatched.
      * @var array
      */
-    public $listeners = [];
+    public $listeners = [
+    ];
 
     /**
      * @var Order

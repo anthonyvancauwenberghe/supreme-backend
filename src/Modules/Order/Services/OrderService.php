@@ -4,11 +4,10 @@ namespace Modules\Order\Services;
 
 use Modules\Order\Entities\Order;
 use Modules\Order\Events\OrderWasCreatedEvent;
-use Modules\Order\Events\OrderWasUpdatedEvent;
+use Modules\Order\Events\OrderWasSuccessfulEvent;
 use Modules\Order\Events\OrderWasDeletedEvent;
 use Modules\Order\Contracts\OrderServiceContract;
 use Modules\Order\Dtos\CreateOrderData;
-use Modules\Order\Dtos\UpdateOrderData;
 use Modules\Order\Contracts\OrderRepositoryContract;
 use Illuminate\Database\Eloquent\Collection;
 use Modules\User\Entities\User;
@@ -48,6 +47,10 @@ class OrderService implements OrderServiceContract
     {
         $data->with('user_id', $user->id);
         $order = $this->repository->create($data->toArray());
+
+        if ($order->status === "SUCCESS")
+            event(new OrderWasSuccessfulEvent($order));
+
         event(new OrderWasCreatedEvent($order));
         return $order;
     }
@@ -60,7 +63,7 @@ class OrderService implements OrderServiceContract
     {
         $order = $this->repository->findOrResolve($id);
         $deleted = $this->repository->delete($order);
-        if($deleted)
+        if ($deleted)
             event(new OrderWasDeletedEvent($order));
         return $deleted;
     }

@@ -10,6 +10,7 @@ $factory->define(Order::class, function (Faker $faker) {
         "size_id" => $faker->randomNumber(),
         "mobile_api" => $faker->boolean,
         "recaptcha_bypass" => $faker->boolean,
-        "checkout_delay" => $faker->randomFloat(1,0,20)
+        "checkout_delay" => $faker->randomFloat(1,0,20),
+        "status" => $faker->randomElement(['SUCCESS','ROBOT','FAILED'])
     ];
 });

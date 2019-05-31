@@ -2,6 +2,7 @@
 
 namespace Modules\Order\Entities;
 
+use Foundation\Traits\Notifiable;
 use Modules\Mongo\Abstracts\MongoModel as Model;
 use Modules\Order\Policies\OrderPolicy;
 use Modules\Order\Attributes\OrderAttributes;
@@ -18,7 +19,7 @@ use Modules\User\Entities\User;
  */
 class Order extends Model implements OrderAttributes, Ownable
 {
-    use ModelFactory, SoftDeletes, HasOwner;
+    use ModelFactory, SoftDeletes, HasOwner, Notifiable;
 
     protected $policies = [
         OrderPolicy::class
