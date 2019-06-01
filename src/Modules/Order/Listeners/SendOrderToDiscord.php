@@ -38,13 +38,13 @@ class SendOrderToDiscord extends QueuedListener
         $region = $event->order->region;
         $apiType = $event->order->mobile_api ? "mobile" : "desktop";
         $delay = $event->order->checkout_delay;
+        $image = $event->order->item_image;
         $duration = $event->order->checkout_duration ?? "Manual";
         $status = $event->order->status;
        // $message = "Order was placed for item $itemName with the $apiType api and a checkout delay of " . $delay . " seconds";
         $embed
             ->title("Item: $itemName | Style: $style | Size: $size", $event->order->item_url)
-            ->image($event->order->image_url)
-            ->thumbnail($event->order->image_url)
+            ->thumbnail($image)
             ->footer("Supremewatcher.io",'http://chittagongit.com/download/315864')
             ->field("Api Type", $apiType,true)
             ->field("Checkout Delay", (string) $delay,true)
