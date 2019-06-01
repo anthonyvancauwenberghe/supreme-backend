@@ -27,6 +27,11 @@ class CreateOrderData extends Dto
     public $item_name;
 
     /**
+     * @var string $item_name
+     */
+    public $item_size;
+
+    /**
      * @var string $item_url
      */
     public $item_url;

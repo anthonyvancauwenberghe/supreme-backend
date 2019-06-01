@@ -9,13 +9,10 @@
 namespace Modules\Demo\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Account\Entities\Account;
 use Modules\Auth0\Contracts\Auth0ServiceContract;
 use Modules\Auth0\Services\Auth0Service;
 use Modules\Auth0\Traits\Auth0TestUser;
 use Modules\Authorization\Entities\Role;
-use Modules\Machine\Entities\Machine;
-use Modules\Proxy\Entities\Proxy;
 
 class DemoSeeder extends Seeder
 {
@@ -49,8 +46,6 @@ class DemoSeeder extends Seeder
     public function run()
     {
         $user = $this->seedUser();
-        $this->seedMachines($user);
-        $this->seedProxies($user);
     }
 
     /**
@@ -62,53 +57,5 @@ class DemoSeeder extends Seeder
         $user->syncRoles(Role::ADMIN);
 
         return $user;
-    }
-
-    /**
-     * @param $user
-     * @return mixed
-     */
-    protected function seedMachines($user)
-    {
-        $machines = Machine::fromFactory(10)
-            ->create([
-                'user_id' => $user->id,
-            ]);
-
-        foreach ($machines as $machine) {
-            $this->seedAccounts($machine);
-        }
-
-        return $machines;
-    }
-
-    protected function seedProxies($user)
-    {
-        $proxies = Proxy::fromFactory(30)
-            ->create([
-                'user_id' => $user->id,
-            ]);
-
-        foreach ($proxies as $proxy) {
-            $this->seedAccounts($proxy);
-        }
-
-        return $proxy;
-    }
-
-    /**
-     * @param $machine
-     * @return mixed
-     */
-    protected function seedAccounts($machine)
-    {
-        $accounts = Account::fromFactory(10)
-            ->state('OSRS')
-            ->create([
-                'user_id' => $machine->user_id,
-                'machine_id' => $machine->id,
-            ]);
-
-        return $accounts;
     }
 }
