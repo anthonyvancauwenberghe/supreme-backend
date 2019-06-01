@@ -13,13 +13,14 @@ use Throwable;
 
 class CacheLatestDropItemsJob extends LockingJob
 {
-    protected $requeueDelay = 1800;
+    protected $requeueDelay = 24 * 3600;
 
     public function execute()
     {
-        $parser = new SupremeCommunityLatestDroplistParser(2,true);
+        $parser = new SupremeCommunityLatestDroplistParser(2, true);
         $items = $parser->parse();
 
-        SupremeDropListCache::put($items);
+        if ($items !== null && !empty($items))
+            SupremeDropListCache::put($items);
     }
 }

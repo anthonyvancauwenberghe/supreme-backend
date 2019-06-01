@@ -38,7 +38,7 @@ class SendOrderToDiscord extends QueuedListener
         $region = $event->order->region;
         $apiType = $event->order->mobile_api ? "mobile" : "desktop";
         $delay = $event->order->checkout_delay;
-        $duration = $event->order->checkout_duration;
+        $duration = $event->order->checkout_duration ?? "Manual";
         $status = $event->order->status;
        // $message = "Order was placed for item $itemName with the $apiType api and a checkout delay of " . $delay . " seconds";
         $embed
