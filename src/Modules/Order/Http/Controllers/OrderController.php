@@ -46,19 +46,19 @@ class OrderController extends Controller
      */
     public function store(CreateOrderRequest $request)
     {
+        $orders = new Collection();
         if ($request->has('items') && is_array($request->items) && !empty($request->items)) {
             $order = $request->all();
             unset($order['items']);
-            $orders = new Collection();
+
             foreach ($request->items as $item) {
                 $order = array_merge($order, $item);
                 $orders->add($this->service->create(new CreateOrderData($order), $request->user()));
             }
-            return OrderTransformer::collection($orders);
         } else {
             $order = $this->service->create(new CreateOrderData($request), $request->user());
-            return OrderTransformer::resource($order);
+            $orders->add($order);
         }
-
+        return OrderTransformer::collection($orders);
     }
 }
