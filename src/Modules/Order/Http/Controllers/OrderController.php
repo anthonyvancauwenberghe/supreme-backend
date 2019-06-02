@@ -4,6 +4,7 @@ namespace Modules\Order\Http\Controllers;
 
 use Foundation\Abstracts\Controller\Controller;
 use Foundation\Responses\ApiResponse;
+use Illuminate\Database\Eloquent\Collection;
 use Modules\Order\Http\Requests\CreateOrderRequest;
 use Modules\Order\Http\Requests\DeleteOrderRequest;
 use Modules\Order\Http\Requests\FindOrderRequest;
@@ -48,10 +49,10 @@ class OrderController extends Controller
         if ($request->has('items') && is_array($request->items) && !empty($request->items)) {
             $order = $request->all();
             unset($order['items']);
-            $orders = [];
+            $orders = new Collection();
             foreach ($request->items as $item) {
                 $order = array_merge($order, $item);
-                $orders[] = $this->service->create(new CreateOrderData($order), $request->user());
+                $orders->add($this->service->create(new CreateOrderData($order), $request->user()));
             }
             return OrderTransformer::collection($orders);
         } else {
