@@ -5,6 +5,7 @@ namespace Modules\Order\Tests;
 use Modules\Auth0\Abstracts\AuthorizedHttpTest;
 use Modules\Authorization\Entities\Role;
 use Modules\Order\Contracts\OrderServiceContract;
+use Modules\Order\Dtos\CreateOrderData;
 use Modules\Order\Entities\Order;
 use Modules\Order\Services\OrderService;
 use Modules\Order\Transformers\OrderTransformer;
@@ -51,5 +52,6 @@ class OrderHttpTest extends AuthorizedHttpTest
         $model = Order::fromFactory()->make([]);
         $response = $this->http('POST', '/v1/orders', $model->toArray());
         $response->assertStatus(201);
+        var_dump($response->decode());
     }
 }

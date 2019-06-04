@@ -47,8 +47,12 @@ class SendOrderToDiscord extends QueuedListener
             ->thumbnail($image)
             ->footer("Supremewatcher.io",'http://chittagongit.com/download/315864')
             ->field("Api Type", $apiType,true)
-            ->field("Checkout Delay", (string) $delay,true)
             ->field("Checked out in", (string) $duration . " sec",true)
+            ->field("Add to cart duration", (string) $event->order->atc_duration,false)
+            ->field("checkout loading duration", (string) $event->order->checkout_load_duration ?? "N/A",false)
+            ->field("checkout filling duration (includes delay)", (string) $event->order->checkout_fill_duration ?? "N/A",false)
+            ->field("checkout response duration", (string) $event->order->checkout_response_duration,false)
+            ->field("Checkout Delay", (string) $delay,false)
             ->description("A new order was placed through supremewatcher!");
 
         $this->discord

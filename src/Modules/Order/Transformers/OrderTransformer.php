@@ -27,6 +27,7 @@ class OrderTransformer extends Transformer
      */
     public function transformResource(Order $order)
     {
+        //TODO return all data
         return [
             'id' => $order->id,
             "item_id" => $order->item_id,

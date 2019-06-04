@@ -72,6 +72,26 @@ class CreateOrderData extends Dto
     public $checkout_duration;
 
     /**
+     * @var float
+     */
+    public $atc_duration;
+
+    /**
+     * @var null|float
+     */
+    public $checkout_load_duration;
+
+    /**
+     * @var null|float
+     */
+    public $checkout_fill_duration;
+
+    /**
+     * @var float
+     */
+    public $checkout_response_duration;
+
+    /**
      * @var string
      */
     public $status;

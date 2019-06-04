@@ -59,6 +59,6 @@ class OrderController extends Controller
             $order = $this->service->create(new CreateOrderData($request), $request->user());
             $orders->add($order);
         }
-        return OrderTransformer::collection($orders);
+        return OrderTransformer::collection($orders)->response()->setStatusCode(201);
     }
 }
