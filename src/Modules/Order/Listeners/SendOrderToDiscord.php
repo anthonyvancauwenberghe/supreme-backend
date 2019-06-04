@@ -55,14 +55,14 @@ class SendOrderToDiscord extends QueuedListener
             ->thumbnail($image)
             ->footer("Supremewatcher.io", 'http://chittagongit.com/download/315864')
             ->field("Api Type", $apiType, true)
-            ->field("Total checkout time", (string)$duration . " sec", true)
-            ->field("Netto checkout time", (string)$nettoduration . " sec", true)
-            ->field("Add to cart duration", (string)$event->order->atc_duration ?? "Manual", false)
-            ->field("checkout loading duration", (string)$event->order->checkout_load_duration ?? "N/A", false)
-            ->field("checkout filling duration (includes delay)", (string)$event->order->checkout_fill_duration ?? "N/A", false)
-            ->field("load + fill duration", (string)$browserbasedduration, false)
-            ->field("checkout response duration", (string)$event->order->checkout_response_duration, false)
-            ->field("Checkout Delay", (string)$delay, false)
+            ->field("Checkout Delay", (string)$delay . " ms", false)
+            ->field("Total checkout time", (string)$duration . " ms", true)
+            ->field("Netto checkout time", (string)$nettoduration . " ms", true)
+            ->field("Add to cart duration", (string)$event->order->atc_duration . " ms" ?? "Manual", false)
+            ->field("checkout loading duration", (string)$event->order->checkout_load_duration . " ms" ?? "N/A", false)
+            ->field("checkout filling duration (includes delay)", (string)$event->order->checkout_fill_duration . " ms" ?? "N/A", false)
+            ->field("load + fill duration", (string)$browserbasedduration . " ms", false)
+            ->field("checkout response duration", (string)$event->order->checkout_response_duration . " ms", false)
             ->description("A new order was placed through supremewatcher!");
 
         $this->discord

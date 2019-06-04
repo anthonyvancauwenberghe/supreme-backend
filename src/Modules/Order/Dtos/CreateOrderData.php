@@ -62,27 +62,27 @@ class CreateOrderData extends Dto
     public $recaptcha_bypass;
 
     /**
-     * @var float|int
+     * @var int|int
      */
     public $checkout_delay;
 
     /**
-     * @var null|float
+     * @var null|int
      */
     public $atc_duration;
 
     /**
-     * @var null|float
+     * @var null|int
      */
     public $checkout_load_duration;
 
     /**
-     * @var null|float
+     * @var null|int
      */
     public $checkout_fill_duration;
 
     /**
-     * @var float
+     * @var int
      */
     public $checkout_response_duration;
 
