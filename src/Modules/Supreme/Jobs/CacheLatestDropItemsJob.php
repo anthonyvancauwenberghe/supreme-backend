@@ -3,12 +3,9 @@
 
 namespace Modules\Supreme\Jobs;
 
-use Cache;
-use Foundation\Abstracts\Jobs\Job;
 use Foundation\Abstracts\Jobs\LockingJob;
 use Modules\Supreme\Cache\SupremeDropListCache;
-use Modules\Supreme\Parsers\SupremeStockParser;
-use Supreme\Parser\SupremeCommunityLatestDroplistParser;
+use Supreme\Parser\SupremeCommunity;
 use Throwable;
 
 class CacheLatestDropItemsJob extends LockingJob
@@ -17,10 +14,15 @@ class CacheLatestDropItemsJob extends LockingJob
 
     public function execute()
     {
-        $parser = new SupremeCommunityLatestDroplistParser(2, true);
-        $items = $parser->parse();
+        try {
+            $supremeCommunity = new SupremeCommunity(3, true);
+            $items = $supremeCommunity->getLatestDroplistItems();
 
-        if ($items !== null && !empty($items))
-            SupremeDropListCache::put($items);
+            if ($items !== null && !empty($items))
+                SupremeDropListCache::put($items);
+
+        } catch (Throwable $e) {
+
+        }
     }
 }

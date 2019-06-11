@@ -16,14 +16,6 @@ Route::get('/', 'FoundationController@api');
 
 Route::get('/authorized', 'FoundationController@authorized')->middleware('auth0');
 
-Route::get('/v1/lookbook', function () {
-    return response()->json(json_decode(Storage::disk('local')->get('lookbooks/springsummer2019.json')));
-});
-
-Route::get('/v1/droplist', function () {
-    return response()->json(\Modules\Supreme\Cache\SupremeDropListCache::get());
-});
-
 
 Route::get('/info', function () {
     if (app()->environment('local'))
