@@ -19,4 +19,4 @@ Route::get('/droplist', function () {
 
 Route::get('/lookbook', function () {
     return response()->json(json_decode(Storage::disk('local')->get('lookbooks/springsummer2019.json') ?? json_encode([])));
-})->middleware(['permission:'.LookbookPermissions::ACCESS_LOOKBOOK]);
+}); //->middleware(['permission:'.LookbookPermissions::ACCESS_LOOKBOOK]);

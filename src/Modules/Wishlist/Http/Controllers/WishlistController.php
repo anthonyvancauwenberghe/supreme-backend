@@ -8,11 +8,9 @@ use Modules\Wishlist\Http\Requests\CreateWishlistRequest;
 use Modules\Wishlist\Http\Requests\DeleteWishlistRequest;
 use Modules\Wishlist\Http\Requests\FindWishlistRequest;
 use Modules\Wishlist\Http\Requests\IndexWishlistRequest;
-use Modules\Wishlist\Http\Requests\UpdateWishlistRequest;
 use Modules\Wishlist\Contracts\WishlistServiceContract;
 use Modules\Wishlist\Transformers\WishlistTransformer;
 use Modules\Wishlist\Dtos\CreateWishlistData;
-use Modules\Wishlist\Dtos\UpdateWishlistData;
 
 class WishlistController extends Controller
 {
