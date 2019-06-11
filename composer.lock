@@ -254,16 +254,16 @@
         },
         {
             "name": "deviouspk/supreme-parser",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deviouspk/supreme-parser.git",
-                "reference": "2de9aa41852fad4cefec661f48d1103ab50accdc"
+                "reference": "9fe26e73d7cb3daccd85781f291a6bceb782a7dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deviouspk/supreme-parser/zipball/2de9aa41852fad4cefec661f48d1103ab50accdc",
-                "reference": "2de9aa41852fad4cefec661f48d1103ab50accdc",
+                "url": "https://api.github.com/repos/deviouspk/supreme-parser/zipball/9fe26e73d7cb3daccd85781f291a6bceb782a7dd",
+                "reference": "9fe26e73d7cb3daccd85781f291a6bceb782a7dd",
                 "shasum": ""
             },
             "require": {
@@ -299,7 +299,7 @@
                 "parser",
                 "supreme"
             ],
-            "time": "2019-06-11T10:06:59+00:00"
+            "time": "2019-06-11T11:30:30+00:00"
         },
         {
             "name": "doctrine/annotations",
