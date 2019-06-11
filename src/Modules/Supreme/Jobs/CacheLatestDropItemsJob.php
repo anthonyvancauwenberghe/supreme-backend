@@ -10,7 +10,7 @@ use Throwable;
 
 class CacheLatestDropItemsJob extends LockingJob
 {
-    protected $requeueDelay = 24 * 3600;
+    protected $requeueDelay = 1 * 3600;
 
     public function execute()
     {
