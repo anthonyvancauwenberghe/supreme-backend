@@ -42,7 +42,7 @@ trait HandlesLimit
         return $requestedLimit;
     }
 
-    private static function processLimit(Collection $resource)
+    private static function processLimit($resource)
     {
         $class = static::class;
         $limit = call_class_function($class, 'getLimitParameter');

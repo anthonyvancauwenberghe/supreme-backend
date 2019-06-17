@@ -47,7 +47,7 @@ abstract class Transformer extends JsonResource implements Transformable
 
     public static function collection($resource, array $relations = [])
     {
-        if (! ($resource instanceof Collection)) {
+        if (! ($resource instanceof \Traversable)) {
             throw new Exception('Object passed to the transformer collection method is not a collection', 500);
         }
         $resource = self::processLimit($resource);

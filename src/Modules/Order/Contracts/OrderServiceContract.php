@@ -14,7 +14,7 @@ interface OrderServiceContract
      * @param $user
      * @return Order[]
      */
-    public function fromUser($user): Collection;
+    public function fromUser($user);
 
     /**
      * @param $id

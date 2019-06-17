@@ -32,11 +32,11 @@ class OrderService implements OrderServiceContract
      * @param $user
      * @return Order[]
      */
-    public function fromUser($user): Collection
+    public function fromUser($user)
     {
         if ($user instanceof User)
             $user = $user->id;
-        return $this->repository->findByField('user_id', $user);
+        return Order::where('user_id',$user)->paginate();
     }
 
     /**
